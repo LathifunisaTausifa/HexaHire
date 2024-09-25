@@ -2,8 +2,31 @@
 
 // const Signup = () => {
 //   const [isLogin, setIsLogin] = useState(true);
-  
+
 //   const toggleForm = () => setIsLogin(!isLogin);
+
+//   const onSubmit = async (event) => {
+//     event.preventDefault();
+//     const formData = new FormData(event.target);
+
+//     formData.append("access_key", "13a799ed-5e96-4605-a29f-c0ebcc893040");
+
+//     const object = Object.fromEntries(formData);
+//     const json = JSON.stringify(object);
+
+//     const res = await fetch("https://api.web3forms.com/submit", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Accept: "application/json"
+//       },
+//       body: json
+//     }).then((res) => res.json());
+
+//     if (res.success) {
+//       console.log("Success", res);
+//     }
+//   };
 
 //   return (
 //     <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -15,37 +38,38 @@
 //         </div>
 //         <form className="mt-8 space-y-6">
 //           <input type="hidden" name="remember" defaultValue="true" />
-//           <div className="rounded-full shadow-sm -space-y-px ">
-//             <div>
+
+//           <div className="mb-4">
+//             <input
+//               type="text"
+//               required
+//               className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+//               placeholder="Username" name='UserName'
+//             />
+//           </div>
+
+//           {!isLogin && (
+//             <div className="mb-4">
 //               <input
-//                 type="text"
+//                 type="email"
 //                 required
-//                 className="appearance-none rounded-none relative block w-full px-3 py-2 border bg-gray-800 border-gray-300 placeholder-white text-gray-900 rounded-t-md focus:outline focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-//                 placeholder="Username"
+//                 className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+//                 placeholder="Email" name='Email'
 //               />
 //             </div>
-//             {!isLogin && (
-//               <div>
-//                 <input
-//                   type="email"
-//                   required
-//                   className="appearance-none rounded-none relative block w-full px-3 py-2 bg-gray-800 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-//                   placeholder="Email"
-//                 />
-//               </div>
-//             )}
-//             <div>
-//               <input
-//                 type="password"
-//                 required
-//                 className="appearance-none rounded-none relative block w-full px-3 py-2 bg-gray-800 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-//                 placeholder="Password"
-//               />
-//             </div>
+//           )}
+
+//           <div className="mb-4">
+//             <input
+//               type="password"
+//               required
+//               className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+//               placeholder="Password" name='Password'
+//             />
 //           </div>
 
 //           {isLogin && (
-//             <div className="flex items-center justify-between">
+//             <div className="flex items-center justify-between mb-4">
 //               <div className="flex items-center">
 //                 <input
 //                   id="remember-me"
@@ -67,7 +91,7 @@
 //           )}
 
 //           {!isLogin && (
-//             <div className="flex items-center">
+//             <div className="flex items-center mb-4">
 //               <input
 //                 id="terms"
 //                 name="terms"
@@ -81,15 +105,16 @@
 //           )}
 
 //           <div>
-//             <button
+//             <button onClick={onSubmit}
 //               type="submit"
-//               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+//               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 //             >
 //               {isLogin ? "Login" : "Register"}
 //             </button>
 //           </div>
 //         </form>
-//         <div className="text-center">
+
+//         <div className="text-center mt-4">
 //           <button onClick={toggleForm} className="text-sm text-indigo-400 hover:text-indigo-500">
 //             {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
 //           </button>
@@ -101,13 +126,47 @@
 
 // export default Signup;
 
-
 import React, { useState } from 'react';
 
 const Signup = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleForm = () => setIsLogin(!isLogin);
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+  
+    const formData = new FormData(event.target);
+    formData.append("access_key", "9c8a7699-43a0-444d-96d5-e34a538ee4bf");
+  
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+  
+    console.log("Payload being sent:", json); // Add this to debug
+  
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      });
+  
+      const result = await res.json();
+  
+      if (res.ok) {
+        console.log("Success", result);
+      } else {
+        console.error("Failed:", result);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
+  
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -117,7 +176,7 @@ const Signup = () => {
             {isLogin ? "Login" : "Registration"}
           </h2>
         </div>
-        <form className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={onSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
 
           <div className="mb-4">
@@ -126,6 +185,7 @@ const Signup = () => {
               required
               className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Username"
+              name="UserName"
             />
           </div>
 
@@ -136,6 +196,7 @@ const Signup = () => {
                 required
                 className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 placeholder="Email"
+                name="Email"
               />
             </div>
           )}
@@ -146,6 +207,7 @@ const Signup = () => {
               required
               className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Password"
+              name="Password"
             />
           </div>
 
