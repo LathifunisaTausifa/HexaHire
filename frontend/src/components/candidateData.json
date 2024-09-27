@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Alice Johnson",
+        "experience": "5 years",
+        "skills": [
+            "JavaScript",
+            "React",
+            "Node.js"
+        ],
+        "status": "Applied",
+        "assessmentMark": null
+    },
+    {
+        "id": 2,
+        "name": "Bob Smith",
+        "experience": "3 years",
+        "skills": [
+            "Python",
+            "Django",
+            "Machine Learning"
+        ],
+        "status": "Assessment In Progress",
+        "assessmentMark": 85
+    },
+    {
+        "id": 3,
+        "name": "Carol White",
+        "experience": "7 years",
+        "skills": [
+            "DevOps",
+            "AWS",
+            "Kubernetes"
+        ],
+        "status": "Interview Scheduled",
+        "assessmentMark": 92
+    },
+    {
+        "id": 4,
+        "name": "David Lee",
+        "experience": "2 years",
+        "skills": [
+            "UI/UX Design",
+            "Figma",
+            "Adobe XD"
+        ],
+        "status": "Applied",
+        "assessmentMark": null
+    },
+    {
+        "id": 5,
+        "name": "Emma Brown",
+        "experience": "6 years",
+        "skills": [
+            "Blockchain",
+            "Smart Contracts",
+            "Solidity"
+        ],
+        "status": "Rejected",
+        "assessmentMark": 60
+    }
+]

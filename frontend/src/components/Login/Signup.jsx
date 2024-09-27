@@ -1,266 +1,300 @@
-// import React, { useState } from 'react';
-
-// const Signup = () => {
-//   const [isLogin, setIsLogin] = useState(true);
-
-//   const toggleForm = () => setIsLogin(!isLogin);
-
-//   const onSubmit = async (event) => {
-//     event.preventDefault();
-//     const formData = new FormData(event.target);
-
-//     formData.append("access_key", "13a799ed-5e96-4605-a29f-c0ebcc893040");
-
-//     const object = Object.fromEntries(formData);
-//     const json = JSON.stringify(object);
-
-//     const res = await fetch("https://api.web3forms.com/submit", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Accept: "application/json"
-//       },
-//       body: json
-//     }).then((res) => res.json());
-
-//     if (res.success) {
-//       console.log("Success", res);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50">
-//       <div className="max-w-md w-full space-y-8 p-10 bg-gray-800 rounded-xl shadow-lg z-10">
-//         <div className="text-center">
-//           <h2 className="mt-6 text-3xl font-bold text-white">
-//             {isLogin ? "Login" : "Registration"}
-//           </h2>
-//         </div>
-//         <form className="mt-8 space-y-6">
-//           <input type="hidden" name="remember" defaultValue="true" />
-
-//           <div className="mb-4">
-//             <input
-//               type="text"
-//               required
-//               className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//               placeholder="Username" name='UserName'
-//             />
-//           </div>
-
-//           {!isLogin && (
-//             <div className="mb-4">
-//               <input
-//                 type="email"
-//                 required
-//                 className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//                 placeholder="Email" name='Email'
-//               />
-//             </div>
-//           )}
-
-//           <div className="mb-4">
-//             <input
-//               type="password"
-//               required
-//               className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-//               placeholder="Password" name='Password'
-//             />
-//           </div>
-
-//           {isLogin && (
-//             <div className="flex items-center justify-between mb-4">
-//               <div className="flex items-center">
-//                 <input
-//                   id="remember-me"
-//                   name="remember-me"
-//                   type="checkbox"
-//                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-//                 />
-//                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
-//                   Remember me
-//                 </label>
-//               </div>
-
-//               <div className="text-sm">
-//                 <a href="#" className="font-medium text-indigo-400 hover:text-indigo-500">
-//                   Forgot password?
-//                 </a>
-//               </div>
-//             </div>
-//           )}
-
-//           {!isLogin && (
-//             <div className="flex items-center mb-4">
-//               <input
-//                 id="terms"
-//                 name="terms"
-//                 type="checkbox"
-//                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-//               />
-//               <label htmlFor="terms" className="ml-2 block text-sm text-gray-300">
-//                 I agree to the terms & conditions
-//               </label>
-//             </div>
-//           )}
-
-//           <div>
-//             <button onClick={onSubmit}
-//               type="submit"
-//               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-//             >
-//               {isLogin ? "Login" : "Register"}
-//             </button>
-//           </div>
-//         </form>
-
-//         <div className="text-center mt-4">
-//           <button onClick={toggleForm} className="text-sm text-indigo-400 hover:text-indigo-500">
-//             {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Signup;
-
 import React, { useState } from 'react';
 
+// Admin and User dashboard components
+const AdminDashboard = () => <h2>Welcome to Admin Dashboard!</h2>;
+const UserDashboard = () => <h2>Welcome to User Dashboard!</h2>;
+
 const Signup = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [formType, setFormType] = useState('login');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [role, setRole] = useState('user'); // Role dropdown (user or admin)
+  const [otp, setOtp] = useState('');
+  const [generatedOtp, setGeneratedOtp] = useState(null);
+  const [isOtpSent, setIsOtpSent] = useState(false);
 
-  const toggleForm = () => setIsLogin(!isLogin);
-
-  const onSubmit = async (event) => {
-    event.preventDefault();
-  
-    const formData = new FormData(event.target);
-    formData.append("access_key", "9c8a7699-43a0-444d-96d5-e34a538ee4bf");
-  
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-  
-    console.log("Payload being sent:", json); // Add this to debug
-  
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: json,
-      });
-  
-      const result = await res.json();
-  
-      if (res.ok) {
-        console.log("Success", result);
-      } else {
-        console.error("Failed:", result);
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+  // Save credentials to localStorage if "Remember Me" is checked
+  const handleRememberMe = () => {
+    if (rememberMe) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
     }
   };
-  
-  
+
+  // Simulate sending OTP (would require a backend service in a real app)
+  const handleSendOtp = () => {
+    const generated = Math.floor(100000 + Math.random() * 900000); // Generate 6-digit OTP
+    setGeneratedOtp(generated);
+    setIsOtpSent(true);
+    alert(`Your OTP is: ${generated}`); // Simulate sending OTP via email
+  };
+
+  // Validate OTP
+  const handleValidateOtp = () => {
+    if (otp === generatedOtp.toString()) {
+      alert('OTP verified successfully!');
+      setFormType('resetPassword');
+    } else {
+      alert('Invalid OTP. Please try again.');
+    }
+  };
+
+  // Reset password functionality
+  const handlePasswordReset = () => {
+    if (password === confirmPassword) {
+      alert('Password reset successful!');
+      setFormType('login');
+    } else {
+      alert('Passwords do not match.');
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRememberMe();
+
+    // Simulate login or registration handling
+    if (formType === 'login') {
+      // Redirect based on role
+      if (role === 'admin') {
+        window.location.href = '/admin'; // Redirect to Admin Dashboard
+      } else {
+        window.location.href = '/user'; // Redirect to User Dashboard
+      }
+    } else if (formType === 'signup') {
+      console.log('Registration:', { fullName, email, password, role });
+    }
+  };
+
+  const renderLoginForm = () => (
+    <>
+      <div className="mb-4">
+        <input
+          type="text"
+          required
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+          placeholder="Username or Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="password"
+          required
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white text-white"
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center">
+          <input
+            id="remember-me"
+            name="remember-me"
+            type="checkbox"
+            className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
+          <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
+            Remember me
+          </label>
+        </div>
+        <div className="text-sm">
+          <button 
+            onClick={() => setFormType('forgotPassword')} 
+            className="font-medium text-indigo-400 hover:text-indigo-500"
+          >
+            Forgot password?
+          </button>
+        </div>
+      </div>
+    </>
+  );
+
+  const renderSignupForm = () => (
+    <>
+      <div className="mb-4">
+        <input
+          type="text"
+          required
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+          placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="email"
+          required
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="password"
+          required
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white text-white"
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+    </>
+  );
+
+  const renderForgotPasswordForm = () => (
+    <>
+      <div className="mb-4">
+        <input
+          type="email"
+          required
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+          placeholder="Enter your registered email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <button
+        onClick={handleSendOtp}
+        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-full"
+      >
+        Send OTP
+      </button>
+      {isOtpSent && (
+        <div className="mt-4">
+          <input
+            type="text"
+            required
+            className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+            placeholder="Enter OTP"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+          />
+          <button
+            onClick={handleValidateOtp}
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-full mt-2"
+          >
+            Validate OTP
+          </button>
+        </div>
+      )}
+    </>
+  );
+
+  const renderResetPasswordForm = () => (
+    <>
+      <div className="mb-4">
+        <input
+          type="password"
+          required
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+          placeholder="New Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="password"
+          required
+          className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white"
+          placeholder="Confirm New Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
+      <button
+        onClick={handlePasswordReset}
+        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-full"
+      >
+        Reset Password
+      </button>
+    </>
+  );
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50">
-      <div className="max-w-md w-full space-y-8 p-10 bg-gray-800 rounded-xl shadow-lg z-10">
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl font-bold text-white">
-            {isLogin ? "Login" : "Registration"}
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={onSubmit}>
-          <input type="hidden" name="remember" defaultValue="true" />
-
-          <div className="mb-4">
-            <input
-              type="text"
-              required
-              className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Username"
-              name="UserName"
-            />
-          </div>
-
-          {!isLogin && (
+    <div className="h-screen bg-gray-800 flex justify-center items-center">
+      <div className="w-full max-w-md bg-gray-900 p-8 rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold text-white mb-6 text-center">
+          {formType === 'login'
+            ? 'Sign In'
+            : formType === 'signup'
+            ? 'Sign Up'
+            : formType === 'forgotPassword'
+            ? 'Forgot Password'
+            : 'Reset Password'}
+        </h2>
+        <form onSubmit={handleSubmit}>
+          {formType === 'login'
+            ? renderLoginForm()
+            : formType === 'signup'
+            ? renderSignupForm()
+            : formType === 'forgotPassword'
+            ? renderForgotPasswordForm()
+            : renderResetPasswordForm()}
+          {formType !== 'forgotPassword' && formType !== 'resetPassword' && (
             <div className="mb-4">
-              <input
-                type="email"
-                required
-                className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                placeholder="Email"
-                name="Email"
-              />
+              <button
+                type="submit"
+                className="w-full bg-indigo-600 text-white py-2 px-4 rounded-full"
+              >
+                {formType === 'login' ? 'Sign In' : 'Sign Up'}
+              </button>
             </div>
           )}
-
-          <div className="mb-4">
-            <input
-              type="password"
-              required
-              className="appearance-none rounded-full w-full px-4 py-3 bg-gray-700 border border-white placeholder-white text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Password"
-              name="Password"
-            />
-          </div>
-
-          {isLogin && (
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-400 hover:text-indigo-500">
-                  Forgot password?
-                </a>
-              </div>
-            </div>
-          )}
-
-          {!isLogin && (
-            <div className="flex items-center mb-4">
-              <input
-                id="terms"
-                name="terms"
-                type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label htmlFor="terms" className="ml-2 block text-sm text-gray-300">
-                I agree to the terms & conditions
-              </label>
-            </div>
-          )}
-
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              {isLogin ? "Login" : "Register"}
-            </button>
-          </div>
         </form>
-
-        <div className="text-center mt-4">
-          <button onClick={toggleForm} className="text-sm text-indigo-400 hover:text-indigo-500">
-            {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
-          </button>
+        <div className="text-center text-white">
+          {formType === 'login' ? (
+            <p>
+              Don't have an account?{' '}
+              <button
+                onClick={() => setFormType('signup')}
+                className="text-indigo-400"
+              >
+                Sign Up
+              </button>
+            </p>
+          ) : (
+            <p>
+              Already have an account?{' '}
+              <button
+                onClick={() => setFormType('login')}
+                className="text-indigo-400"
+              >
+                Sign In
+              </button>
+            </p>
+          )}
         </div>
       </div>
     </div>

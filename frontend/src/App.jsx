@@ -8,24 +8,32 @@ import JobCreationForm from './components/Job/JobCreationForm'
 import JobListingsManagement from './components/Job/JobListingsManagement'
 import JobManagementSystem from './components/Job/JobManagementSystem'
 import JobCategoriesManagement from './components/Job/JobCategoriesManagement'
-import Dashboard from './components/ATS/Dashboard'
+import Dashboard from './components/DashBoard'
 import ApplicationsManagement from './components/ATS/ApplicationsManagement'
+import Final_Confetti from './components/Final_Confetti'
+import Chats from './components/Chats'
+import Chatbot from './components/initialChatData'
+import Meeting from './components/Meeting'
 
 
 const App = () => {
   return (
     <div>
-    {/* <Hero />
+    <Hero />
     <Signup />
-    <AccountCreationForm /> */}
+    <AccountCreationForm />
     {/* <Interview /> */}
     {/* <Forms /> */}
     {/* <JobCreationForm />
     <JobListingsManagement /> */}
-    {/* <JobManagementSystem /> */}
+    <JobManagementSystem />
     {/* <JobCategoriesManagement /> */}
-    <Dashboard />
+    {/* <Dashboard />
     <ApplicationsManagement />
+    <Chatbot />
+    <Chats />
+    <Final_Confetti />
+    <Meeting /> */}
     </div>
   )
 }

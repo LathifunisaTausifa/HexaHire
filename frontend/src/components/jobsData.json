@@ -1,0 +1,322 @@
+{
+    "Web Development": [
+        {
+            "title": "Junior Web Developer",
+            "experience": "Fresher",
+            "description": "Entry-level position for new graduates.",
+            "expected_salary": "₹3-5 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote or On-site",
+            "required_skills": ["HTML", "CSS", "JavaScript", "React"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level Web Developer",
+            "experience": "Intermediate",
+            "description": "2-3 years experience required.",
+            "expected_salary": "₹5-8 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["HTML", "CSS", "JavaScript", "React", "Node.js"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior Web Developer",
+            "experience": "Experienced",
+            "description": "5+ years experience with leadership skills.",
+            "expected_salary": "₹10-15 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote or On-site",
+            "required_skills": ["React", "Node.js", "Cloud Computing", "Leadership"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "Data Science": [
+        {
+            "title": "Junior Data Scientist",
+            "experience": "Fresher",
+            "description": "Entry-level data analysis and model building.",
+            "expected_salary": "₹4-6 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["Python", "SQL", "Statistics"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level Data Scientist",
+            "experience": "Intermediate",
+            "description": "Advanced data analysis with 2-3 years experience.",
+            "expected_salary": "₹8-12 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Python", "Machine Learning", "Big Data"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior Data Scientist",
+            "experience": "Experienced",
+            "description": "Lead data science projects with 5+ years experience.",
+            "expected_salary": "₹15-20 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote or On-site",
+            "required_skills": ["Leadership", "Deep Learning", "AI Systems"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "Cyber Security": [
+        {
+            "title": "Junior Cybersecurity Analyst",
+            "experience": "Fresher",
+            "description": "Entry-level security analysis position.",
+            "expected_salary": "₹3-5 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Networking", "Firewalls", "Threat Analysis"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level Cybersecurity Analyst",
+            "experience": "Intermediate",
+            "description": "2-3 years experience with security protocols.",
+            "expected_salary": "₹6-10 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["Threat Analysis", "Penetration Testing", "Encryption"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior Cybersecurity Analyst",
+            "experience": "Experienced",
+            "description": "5+ years in cybersecurity leadership roles.",
+            "expected_salary": "₹12-18 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Leadership", "Advanced Threat Analysis", "Security Protocols"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "Machine Learning": [
+        {
+            "title": "Junior Machine Learning Engineer",
+            "experience": "Fresher",
+            "description": "Entry-level model training and data handling.",
+            "expected_salary": "₹4-6 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["Python", "Machine Learning", "TensorFlow"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level Machine Learning Engineer",
+            "experience": "Intermediate",
+            "description": "2-3 years of experience in building and deploying models.",
+            "expected_salary": "₹8-12 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Scikit-learn", "Deep Learning", "Cloud ML"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior Machine Learning Engineer",
+            "experience": "Experienced",
+            "description": "5+ years leading complex ML projects and teams.",
+            "expected_salary": "₹15-22 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote or On-site",
+            "required_skills": ["AI Systems", "Leadership", "Model Optimization"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "AI and Automation": [
+        {
+            "title": "Junior AI Developer",
+            "experience": "Fresher",
+            "description": "Entry-level AI development and automation tasks.",
+            "expected_salary": "₹4-6 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["AI Basics", "Python", "Automation Frameworks"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level AI Developer",
+            "experience": "Intermediate",
+            "description": "2-3 years of experience in developing AI systems.",
+            "expected_salary": "₹8-13 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["AI Models", "Deep Learning", "Automation"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior AI Developer",
+            "experience": "Experienced",
+            "description": "5+ years in AI system development and leading automation teams.",
+            "expected_salary": "₹16-25 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote or On-site",
+            "required_skills": ["Leadership", "AI Strategy", "Automation Platforms"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "Cloud Computing": [
+        {
+            "title": "Junior Cloud Engineer",
+            "experience": "Fresher",
+            "description": "Entry-level cloud infrastructure management.",
+            "expected_salary": "₹4-6 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["AWS", "Azure", "Cloud Fundamentals"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level Cloud Engineer",
+            "experience": "Intermediate",
+            "description": "2-3 years of experience managing cloud platforms.",
+            "expected_salary": "₹8-14 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["Cloud Architecture", "Kubernetes", "DevOps"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior Cloud Engineer",
+            "experience": "Experienced",
+            "description": "5+ years managing complex cloud solutions.",
+            "expected_salary": "₹15-25 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Cloud Security", "Leadership", "Serverless"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "Mobile App Development": [
+        {
+            "title": "Junior Mobile App Developer",
+            "experience": "Fresher",
+            "description": "Entry-level mobile application development.",
+            "expected_salary": "₹3-5 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["React Native", "Flutter", "Java"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level Mobile App Developer",
+            "experience": "Intermediate",
+            "description": "2-3 years of experience in developing apps for mobile platforms.",
+            "expected_salary": "₹6-10 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["iOS", "Android", "Swift"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior Mobile App Developer",
+            "experience": "Experienced",
+            "description": "5+ years of leading mobile app projects.",
+            "expected_salary": "₹12-18 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Leadership", "Mobile Security", "App Optimization"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "Blockchain": [
+        {
+            "title": "Junior Blockchain Developer",
+            "experience": "Fresher",
+            "description": "Entry-level blockchain development.",
+            "expected_salary": "₹4-6 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["Solidity", "Blockchain Fundamentals", "Smart Contracts"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level Blockchain Developer",
+            "experience": "Intermediate",
+            "description": "2-3 years of experience developing blockchain solutions.",
+            "expected_salary": "₹8-15 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Ethereum", "DApps", "Cryptography"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior Blockchain Developer",
+            "experience": "Experienced",
+            "description": "5+ years in blockchain architecture and development.",
+            "expected_salary": "₹15-25 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote or On-site",
+            "required_skills": ["Leadership", "Advanced Blockchain", "Smart Contract Audits"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "DevOps": [
+        {
+            "title": "Junior DevOps Engineer",
+            "experience": "Fresher",
+            "description": "Entry-level DevOps tasks such as CI/CD and automation.",
+            "expected_salary": "₹4-6 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Linux", "Docker", "CI/CD Tools"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level DevOps Engineer",
+            "experience": "Intermediate",
+            "description": "2-3 years of experience managing infrastructure and automation.",
+            "expected_salary": "₹8-12 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["Kubernetes", "Cloud Platforms", "Infrastructure Automation"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior DevOps Engineer",
+            "experience": "Experienced",
+            "description": "5+ years in DevOps, infrastructure management, and automation.",
+            "expected_salary": "₹15-22 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote or On-site",
+            "required_skills": ["Leadership", "Cloud DevOps", "Automation Strategy"],
+            "employment_type": "Full-time"
+        }
+    ],
+    "UI/UX Design": [
+        {
+            "title": "Junior UI/UX Designer",
+            "experience": "Fresher",
+            "description": "Entry-level UI/UX design and research.",
+            "expected_salary": "₹3-5 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote",
+            "required_skills": ["Figma", "Adobe XD", "User Research"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Mid-level UI/UX Designer",
+            "experience": "Intermediate",
+            "description": "2-3 years of experience designing user interfaces and experiences.",
+            "expected_salary": "₹6-10 LPA",
+            "posted_on": "2024-09-24",
+            "location": "On-site",
+            "required_skills": ["Prototyping", "UX Design", "Visual Design"],
+            "employment_type": "Full-time"
+        },
+        {
+            "title": "Senior UI/UX Designer",
+            "experience": "Experienced",
+            "description": "5+ years leading UI/UX projects and teams.",
+            "expected_salary": "₹12-18 LPA",
+            "posted_on": "2024-09-24",
+            "location": "Remote or On-site",
+            "required_skills": ["Leadership", "Advanced UI/UX", "Design Systems"],
+            "employment_type": "Full-time"
+        }
+    ]
+}
