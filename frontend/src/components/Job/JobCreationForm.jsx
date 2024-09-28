@@ -1,113 +1,77 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Select from 'react-select';
 import { AlertCircle, Calendar, DollarSign, MapPin, Briefcase } from 'lucide-react';
 import { Alert, AlertDescription } from '../Job/Alert';
+import AdminNavbar from '../Navbar/AdminNavbar';
+import Swal from 'sweetalert2'
+import { Controller } from 'react-hook-form';
 
 const JobCreationForm = ({ onJobCreate }) => {
-  const [formData, setFormData] = useState({
-    jobTitle: '',
-    jobDescription: '',
-    department: '',
-    jobLocation: '',
-    employmentType: '',
-    salaryRangeMin: '',
-    salaryRangeMax: '',
-    applicationDeadline: '',
-    requiredQualifications: '',
-    preferredQualifications: '',
-    responsibilities: ''
-  });
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const [departments, setDepartments] = useState([
+    { value: 'HR', label: 'HR' },
+    { value: 'IT', label: 'IT' },
+    { value: 'Marketing', label: 'Marketing' },
+    { value: 'Sales', label: 'Sales' },
+  ]);
+  const [employmentTypes, setEmploymentTypes] = useState([
+    { value: 'Full-time', label: 'Full-time' },
+    { value: 'Part-time', label: 'Part-time' },
+    { value: 'Contract', label: 'Contract' },
+    { value: 'Internship', label: 'Internship' }
+  ]);
 
-  const [errors, setErrors] = useState({});
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
+  const onSubmit = (data, isDraft = false) => {
+    // Call your job creation function here
+    onJobCreate(data, isDraft);
+    Swal.fire({
+      title: "Success!",
+      text: "Job Has been in Draft!",
+      icon: "success"
+    });
+    // reset(); // Reset form after submission
   };
 
-  const validateForm = () => {
-    let newErrors = {};
-    if (!formData.jobTitle) newErrors.jobTitle = 'Job title is required';
-    if (formData.jobDescription.length < 50) newErrors.jobDescription = 'Job description must be at least 50 characters';
-    if (!formData.department) newErrors.department = 'Department is required';
-    if (!formData.jobLocation) newErrors.jobLocation = 'Job location is required';
-    if (!formData.employmentType) newErrors.employmentType = 'Employment type is required';
-    if (!formData.salaryRangeMin || !formData.salaryRangeMax) newErrors.salaryRange = 'Salary range is required';
-    if (!formData.applicationDeadline) newErrors.applicationDeadline = 'Application deadline is required';
-    if (!formData.requiredQualifications) newErrors.requiredQualifications = 'Required qualifications are required';
-    if (!formData.responsibilities) newErrors.responsibilities = 'Responsibilities are required';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e, isDraft = false) => {
-    e.preventDefault();
-    if (validateForm()) {
-      onJobCreate(formData, isDraft);
-      setFormData({
-        jobTitle: '',
-        jobDescription: '',
-        department: '',
-        jobLocation: '',
-        employmentType: '',
-        salaryRangeMin: '',
-        salaryRangeMax: '',
-        applicationDeadline: '',
-        requiredQualifications: '',
-        preferredQualifications: '',
-        responsibilities: ''
-      });
-    }
-  };
-
-  // ... rest of the component remains the same ...
-  
+  const jobcreation = (event) => {
+    event.preventDefault(); // Prevent form submission
+    Swal.fire({
+      title: "Success!",
+      text: "Job Created Successfully!",
+      icon: "success"
+    });
+  }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mb-8">
-      <h2 className="text-2xl font-bold mb-6">Create New Job Posting</h2>
-      <form onSubmit={(e) => handleSubmit(e, false)}>
-        {/* ... form fields remain the same ... */}
-        <div className="space-y-6">
-          <div>
-            <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700">Job Title</label>
-            <input
-              type="text"
-              id="jobTitle"
-              name="jobTitle"
-              value={formData.jobTitle}
-              onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              placeholder="Enter the job title"
-            />
-            {errors.jobTitle && <p className="mt-1 text-sm text-red-600">{errors.jobTitle}</p>}
-          </div>
+    <div className="">
+      <AdminNavbar />
+      <div className="container mx-auto flex justify-center p-2">
+        <h1 className="text-red-500 text-3xl uppercase font-bold">Create New Job Postings</h1>
+      </div>
+      <div className="max-w-4xl mt-10 mx-auto p-6 border-2 border-indigo-600 bg-white shadow-lg rounded-lg mb-8">
+        <h2 className="text-2xl font-bold mb-6 text-indigo-600">Job Details</h2>
+        <form className='' onSubmit={handleSubmit((data) => onSubmit(data, false))}>
+          <div className="grid grid-cols-2 gap-6">
+            {/* Job Title */}
+            <div>
+              <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 ">Job Title</label>
+              <input
+                {...register('jobTitle', { required: 'Job title is required' })}
+                id="jobTitle"
+                name="jobTitle"
+                className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 "
+                placeholder="Enter job title"
+              />
+              {errors.jobTitle && <p className="mt-1 text-sm text-red-600">{errors.jobTitle.message}</p>}
+            </div>
 
-          <div>
-            <label htmlFor="jobDescription" className="block text-sm font-medium text-gray-700">Job Description</label>
-            <textarea
-              id="jobDescription"
-              name="jobDescription"
-              value={formData.jobDescription}
-              onChange={handleInputChange}
-              rows="4"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              placeholder="Enter the job description"
-            ></textarea>
-            {errors.jobDescription && <p className="mt-1 text-sm text-red-600">{errors.jobDescription}</p>}
-          </div>
-
-          <div>
+            {/* Department */}
+            <div>
             <label htmlFor="department" className="block text-sm font-medium text-gray-700">Department</label>
             <select
               id="department"
               name="department"
-              value={formData.department}
-              onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 focus:border-indigo-300 "
             >
               <option value="">Select a department</option>
               <option value="HR">HR</option>
@@ -118,167 +82,147 @@ const JobCreationForm = ({ onJobCreate }) => {
             {errors.department && <p className="mt-1 text-sm text-red-600">{errors.department}</p>}
           </div>
 
-          <div>
-            <label htmlFor="jobLocation" className="block text-sm font-medium text-gray-700">Job Location</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <MapPin className="h-5 w-5 text-gray-400" />
+            {/* Job Description */}
+            <div className="col-span-2">
+              <label htmlFor="jobDescription" className="block text-sm font-medium text-gray-700">Job Description</label>
+              <textarea
+                {...register('jobDescription', { required: 'Job description is required', minLength: { value: 50, message: 'Minimum 50 characters required' } })}
+                id="jobDescription"
+                rows="3"
+                className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Enter job description"
+              />
+              {errors.jobDescription && <p className="mt-1 text-sm text-red-600">{errors.jobDescription.message}</p>}
+            </div>
+
+            {/* Job Location */}
+            <div>
+              <label htmlFor="jobLocation" className="block text-sm font-medium text-gray-700">Job Location</label>
+              <div className="relative mt-1 rounded-md shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <MapPin className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  {...register('jobLocation', { required: 'Job location is required' })}
+                  id="jobLocation"
+                  name="jobLocation"
+                  className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 pl-10 focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="Enter job location"
+                />
               </div>
-              <input
-                type="text"
-                id="jobLocation"
-                name="jobLocation"
-                value={formData.jobLocation}
-                onChange={handleInputChange}
-                className="pl-10 block w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                placeholder="Enter the job location"
+              {errors.jobLocation && <p className="mt-1 text-sm text-red-600">{errors.jobLocation.message}</p>}
+            </div>
+
+            {/* Employment Type */}
+            <div>
+              <label htmlFor="employmentType" className="block text-sm font-medium text-gray-700">Employment Type</label>
+              <Select
+                options={employmentTypes}
+                className="mt-1"
+                placeholder="Select employment type"
+                onChange={(selectedOption) => register('employmentType').onChange({ target: { value: selectedOption.value } })}
+              />
+              {errors.employmentType && <p className="mt-1 text-sm text-red-600">{errors.employmentType.message}</p>}
+            </div>
+
+            {/* Salary Range Min */}
+            <div>
+              <label htmlFor="salaryRangeMin" className="block text-sm font-medium text-gray-700">Salary Range Min</label>
+              <div className="relative mt-1 rounded-md shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <DollarSign className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="number"
+                  {...register('salaryRangeMin', { required: 'Minimum salary is required' })}
+                  id="salaryRangeMin"
+                  className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 pl-10 focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="Min Salary"
+                />
+              </div>
+              {errors.salaryRangeMin && <p className="mt-1 text-sm text-red-600">{errors.salaryRangeMin.message}</p>}
+            </div>
+
+            {/* Salary Range Max */}
+            <div>
+              <label htmlFor="salaryRangeMax" className="block text-sm font-medium text-gray-700">Salary Range Max</label>
+              <div className="relative mt-1 rounded-md shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <DollarSign className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="number"
+                  {...register('salaryRangeMax', { required: 'Maximum salary is required' })}
+                  id="salaryRangeMax"
+                  className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 pl-10 focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="Max Salary"
+                />
+              </div>
+              {errors.salaryRangeMax && <p className="mt-1 text-sm text-red-600">{errors.salaryRangeMax.message}</p>}
+            </div>
+
+            {/* Application Deadline */}
+            <div>
+              <label htmlFor="applicationDeadline" className="block text-sm font-medium text-gray-700">Application Deadline</label>
+              <div className="relative mt-1 rounded-md shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Calendar className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="date"
+                  {...register('applicationDeadline', { required: 'Application deadline is required' })}
+                  id="applicationDeadline"
+                  className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 pl-10 focus:ring-indigo-500 focus:border-indigo-500"
+                />
+              </div>
+              {errors.applicationDeadline && <p className="mt-1 text-sm text-red-600">{errors.applicationDeadline.message}</p>}
+            </div>
+
+            {/* Required Qualifications */}
+            <div className="col-span-2">
+              <label htmlFor="requiredQualifications" className="block text-sm font-medium text-gray-700">Required Qualifications</label>
+              <textarea
+                {...register('requiredQualifications', { required: 'Required qualifications are mandatory' })}
+                id="requiredQualifications"
+                rows="3"
+                className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Enter required qualifications"
+              />
+              {errors.requiredQualifications && <p className="mt-1 text-sm text-red-600">{errors.requiredQualifications.message}</p>}
+            </div>
+
+            {/* Preferred Qualifications */}
+            <div className="col-span-2">
+              <label htmlFor="preferredQualifications" className="block text-sm font-medium text-gray-700">Preferred Qualifications</label>
+              <textarea
+                {...register('preferredQualifications')}
+                id="preferredQualifications"
+                rows="3"
+                className="mt-1 p-2 border-2 border-gray-200 block w-full rounded-md  hover:border-indigo-500 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Enter preferred qualifications (optional)"
               />
             </div>
-            {errors.jobLocation && <p className="mt-1 text-sm text-red-600">{errors.jobLocation}</p>}
-          </div>
 
-          <div>
-            <label htmlFor="employmentType" className="block text-sm font-medium text-gray-700">Employment Type</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Briefcase className="h-5 w-5 text-gray-400" />
-              </div>
-              <select
-                id="employmentType"
-                name="employmentType"
-                value={formData.employmentType}
-                onChange={handleInputChange}
-                className="pl-10 block w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              >
-                <option value="">Select employment type</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-                <option value="Internship">Internship</option>
-              </select>
-            </div>
-            {errors.employmentType && <p className="mt-1 text-sm text-red-600">{errors.employmentType}</p>}
           </div>
-
-          <div>
-            <label htmlFor="salaryRangeMin" className="block text-sm font-medium text-gray-700">Salary Range</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <DollarSign className="h-5 w-5 text-gray-400" />
-              </div>
-              <input
-                type="number"
-                id="salaryRangeMin"
-                name="salaryRangeMin"
-                value={formData.salaryRangeMin}
-                onChange={handleInputChange}
-                className="pl-10 block w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                placeholder="Min"
-              />
-            </div>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <DollarSign className="h-5 w-5 text-gray-400" />
-              </div>
-              <input
-                type="number"
-                id="salaryRangeMax"
-                name="salaryRangeMax"
-                value={formData.salaryRangeMax}
-                onChange={handleInputChange}
-                className="pl-10 block w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                placeholder="Max"
-              />
-            </div>
-            {errors.salaryRange && <p className="mt-1 text-sm text-red-600">{errors.salaryRange}</p>}
+          {/* Draft and Publish Buttons */}
+          <div className="mt-6 flex justify-end gap-4">
+            <button
+              type="button"
+              onClick={() => handleSubmit((data) => onSubmit(data, true))()}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-6 rounded-lg shadow"
+            >
+              Save as Draft
+            </button>
+            <button
+              type="submit" onClick={jobcreation}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg shadow"
+            >
+              Create Job
+            </button>
           </div>
-
-          <div>
-            <label htmlFor="applicationDeadline" className="block text-sm font-medium text-gray-700">Application Deadline</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Calendar className="h-5 w-5 text-gray-400" />
-              </div>
-              <input
-                type="date"
-                id="applicationDeadline"
-                name="applicationDeadline"
-                value={formData.applicationDeadline}
-                onChange={handleInputChange}
-                className="pl-10 block w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              />
-            </div>
-            {errors.applicationDeadline && <p className="mt-1 text-sm text-red-600">{errors.applicationDeadline}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="requiredQualifications" className="block text-sm font-medium text-gray-700">Required Qualifications</label>
-            <textarea
-              id="requiredQualifications"
-              name="requiredQualifications"
-              value={formData.requiredQualifications}
-              onChange={handleInputChange}
-              rows="4"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              placeholder="Enter the required qualifications"
-            ></textarea>
-            {errors.requiredQualifications && <p className="mt-1 text-sm text-red-600">{errors.requiredQualifications}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="preferredQualifications" className="block text-sm font-medium text-gray-700">Preferred Qualifications</label>
-            <textarea
-              id="preferredQualifications"
-              name="preferredQualifications"
-              value={formData.preferredQualifications}
-              onChange={handleInputChange}
-              rows="4"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              placeholder="Enter the preferred qualifications"
-            ></textarea>
-          </div>
-
-          <div>
-            <label htmlFor="responsibilities" className="block text-sm font-medium text-gray-700">Responsibilities</label>
-            <textarea
-              id="responsibilities"
-              name="responsibilities"
-              value={formData.responsibilities}
-              onChange={handleInputChange}
-              rows="4"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              placeholder="Enter the job responsibilities"
-            ></textarea>
-            {errors.responsibilities && <p className="mt-1 text-sm text-red-600">{errors.responsibilities}</p>}
-          </div>
-        </div>
-
-        {Object.keys(errors).length > 0 && (
-          <Alert variant="destructive" className="mt-6">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              Please correct the errors in the form before submitting.
-            </AlertDescription>
-          </Alert>
-        )}
-        
-        <div className="mt-8 space-x-4">
-          <button
-            type="button"
-            onClick={(e) => handleSubmit(e, true)}
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-          >
-            Save as Draft
-          </button>
-          <button
-            type="submit"
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Publish
-          </button>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+      <br></br>    <hr></hr></div>
   );
 };
 

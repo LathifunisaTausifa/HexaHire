@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FiBriefcase, FiUsers, FiEye, FiChevronRight, FiX } from 'react-icons/fi';
+import AdminNavbar from './Navbar/AdminNavbar';
 
 const Dashboard = () => {
   const [activeScreen, setActiveScreen] = useState('dashboard');
@@ -39,13 +40,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100  inset-0 top-0">
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-      <nav className="bg-indigo-600 p-4">
-        <div className="container mx-auto">
-          <h1 className="text-white text-2xl font-bold">Recruitment Dashboard</h1>
-        </div>
-      </nav>
+      <AdminNavbar />
       <main className="container mx-auto p-4">
         {activeScreen === 'dashboard' && (
           <DashboardScreen 

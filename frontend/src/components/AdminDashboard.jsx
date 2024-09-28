@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import candidateData from "./candidateData.json"; // Import the updated candidate data
+import AdminNavbar from "./Navbar/AdminNavbar";
 
 const AdminDashboard = () => {
     const [candidates, setCandidates] = useState(candidateData);
@@ -21,26 +22,9 @@ const AdminDashboard = () => {
     };
 
     return (
+        <div>
+        <AdminNavbar />
         <div className="flex h-screen bg-gray-100">
-            {/* Sidebar */}
-            <div className="w-64 bg-gray-800 text-white p-6">
-                <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
-                <ul>
-                    <li className="mb-4 hover:bg-gray-700 p-2 rounded">
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li className="mb-4 hover:bg-gray-700 p-2 rounded">
-                        <a href="#">Candidates</a>
-                    </li>
-                    <li className="mb-4 hover:bg-gray-700 p-2 rounded">
-                        <a href="#">Jobs</a>
-                    </li>
-                    <li className="mb-4 hover:bg-gray-700 p-2 rounded">
-                        <a href="#">Settings</a>
-                    </li>
-                </ul>
-            </div>
-
             {/* Main Content */}
             <div className="flex-1 p-10 overflow-auto">
                 <h1 className="text-4xl font-bold mb-4">Admin Dashboard</h1>
@@ -124,6 +108,7 @@ const AdminDashboard = () => {
                     </table>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

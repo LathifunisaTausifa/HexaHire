@@ -243,7 +243,7 @@ const Signup = () => {
   );
 
   return (
-    <div className="h-screen bg-gray-800 flex justify-center items-center">
+    <div className="h-screen bg-gray-800 bg-opacity-10 flex justify-center items-center">
       <div className="w-full max-w-md bg-gray-900 p-8 rounded-xl shadow-lg">
         <h2 className="text-3xl font-bold text-white mb-6 text-center">
           {formType === 'login'
