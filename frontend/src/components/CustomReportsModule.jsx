@@ -263,8 +263,6 @@ const CustomReportsModule = () => {
                         <ReportForm onSubmit={showEditReport ? handleUpdateReport : handleCreateReport} initialData={selectedReport} />
                     </div>
                 )}
-
-
                 {!showCreateReport && !showEditReport && (
                     <div className="bg-white rounded shadow overflow-x-auto">
                         <table className="min-w-full">
