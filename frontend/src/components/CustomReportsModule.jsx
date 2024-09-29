@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Eye, Edit, Trash2, FileDown, X, Upload } from 'lucide-react';
 import Navbar from '../components/Navbar/AdminNavbar';
+import { faker } from '@faker-js/faker';
 
 const initialReports = [
     {
@@ -35,6 +36,38 @@ const initialReports = [
             { applicantName: 'Frank Lee', source: 'Job Board', dateApplied: '2024-09-15' },
         ]
     },
+    {
+        id: 3,
+        name: "Weekly Hiring Report",
+        dateCreated: "2024-09-22",
+        createdBy: "Jane Smith",
+        dateRange: "2024-09-15 to 2024-09-21",
+        status: "Hired",
+        position: "Software Engineer",
+        source: "LinkedIn",
+        fields: ["Applicant Name", "Date Applied", "Status", "Position", "Source"],
+        data: [
+            { applicantName: "David Brown", dateApplied: "2024-09-16", status: "Hired", position: "Software Engineer", source: "LinkedIn" },
+            { applicantName: "Emily Davis", dateApplied: "2024-09-18", status: "Hired", position: "Software Engineer", source: "LinkedIn" },
+            { applicantName: "Frank Miller", dateApplied: "2024-09-19", status: "Hired", position: "Software Engineer", source: "LinkedIn" }
+        ]
+    },
+    {
+        id: 4,
+        name: "Quarterly Hiring Report",
+        dateCreated: "2024-09-30",
+        createdBy: "Robert Taylor",
+        dateRange: "2024-07-01 to 2024-09-30",
+        status: "In Progress",
+        position: "Marketing Manager",
+        source: "All",
+        fields: ["Applicant Name", "Date Applied", "Status", "Position", "Source"],
+        data: [
+            { applicantName: "Grace Lee", dateApplied: "2024-07-15", status: "In Progress", position: "Marketing Manager", source: "Job Board" },
+            { applicantName: "Henry White", dateApplied: "2024-08-10", status: "In Progress", position: "Marketing Manager", source: "Referral" },
+            { applicantName: "Ivy Green", dateApplied: "2024-09-05", status: "In Progress", position: "Marketing Manager", source: "Career Fair" }
+        ]
+    },    
 ];
 
 
@@ -53,32 +86,32 @@ const CustomReportsModule = () => {
         fields: [],
     });
 
-
+    // Create Report Handler
     const handleCreateReport = () => {
         const reportToAdd = {
             ...newReport,
             id: reports.length + 1,
             dateCreated: new Date().toISOString().split('T')[0],
             createdBy: 'Current User',
-            data: [] // In a real app, this would be populated with actual data
+            data: []
         };
         setReports([...reports, reportToAdd]);
         setShowCreateReport(false);
         setNewReport({ name: '', dateRange: '', status: '', position: '', source: '', fields: [] });
     };
 
-
+    // Delete Report Handler
     const handleDeleteReport = (id) => {
         setReports(reports.filter(report => report.id !== id));
     };
 
-
+    // View Report Handler
     const handleViewReport = (report) => {
         setSelectedReport(report);
         setShowReportDetails(true);
     };
 
-
+    // Edit Report Handler
     const handleEditReport = (report) => {
         setSelectedReport(report);
         setNewReport({
@@ -92,7 +125,7 @@ const CustomReportsModule = () => {
         setShowEditReport(true);
     };
 
-
+    // Update Report Handler
     const handleUpdateReport = () => {
         const updatedReports = reports.map(report =>
             report.id === selectedReport.id ? { ...report, ...newReport } : report
@@ -103,7 +136,7 @@ const CustomReportsModule = () => {
         setNewReport({ name: '', dateRange: '', status: '', position: '', source: '', fields: [] });
     };
 
-
+    // Import Report Handler
     const handleImportReport = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -127,8 +160,7 @@ const CustomReportsModule = () => {
         }
     };
 
-
-    const ReportForm = ({ onSubmit, initialData = {} }) => (
+    const ReportForm = ({ onSubmit }) => (
         <div className="space-y-4">
             <div>
                 <label className="block mb-1">Report Name</label>
@@ -225,127 +257,174 @@ const CustomReportsModule = () => {
                     onClick={onSubmit}
                     className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
                 >
-                    {initialData.id ? 'Update Report' : 'Generate Report'}
+                    {showEditReport ? 'Update Report' : 'Generate Report'}
                 </button>
             </div>
         </div>
     );
 
-
     return (
         <div>
             <Navbar />
-            <div className="p-6 max-w-6xl mx-auto">
-                <div className="container mx-auto flex justify-center p-2">
-                    <h1 className="text-red-500 text-3xl uppercase font-bold">Custom Reports</h1>
-                </div>
-                <div className=" my-6">
-                    <div className="space-x-2 flex justify-center gap-6">
+            <div className="flex">
+                <div className="flex-1 p-6 space-y-6">
+                    <div className="container mx-auto flex justify-center p-2">
+                        <h1 className="text-red-500 text-3xl uppercase font-bold">Custom Reports Module</h1>
+                    </div>
+                    <div className="flex justify-between items-center">
                         <button
                             onClick={() => setShowCreateReport(true)}
-                            className="flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                            className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 flex items-center space-x-2"
                         >
-                            <Plus className="mr-2" size={20} />
-                            Create New Report
+                            <Plus className="w-5 h-5" />
+                            <span>Generate New Report</span>
                         </button>
-                        <label className="flex items-center bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 cursor-pointer">
-                            <Upload className="mr-2" size={20} />
-                            Import Report
-                            <input type="file" className="hidden" onChange={handleImportReport} accept=".json" />
-                        </label>
-                    </div>
-                </div>
-
-
-                {(showCreateReport || showEditReport) && (
-                    <div className="bg-white p-6 rounded shadow mb-6">
-                        <h2 className="text-xl font-semibold mb-4">{showEditReport ? 'Edit Report' : 'Create New Report'}</h2>
-                        <ReportForm onSubmit={showEditReport ? handleUpdateReport : handleCreateReport} initialData={selectedReport} />
-                    </div>
-                )}
-                {!showCreateReport && !showEditReport && (
-                    <div className="bg-white rounded shadow overflow-x-auto">
-                        <table className="min-w-full">
-                            <thead className="bg-gray-100">
-                                <tr className='text-black bg-gray-100 uppercase border-2 border-gray-500 text-sm leading-normal'>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Report Name</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Created</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created By</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white font-light">
-                                {reports.map((report) => (
-                                    <tr key={report.id} className='border-b border-gray-500 hover:bg-gray-100'>
-                                        <td className="px-6 py-4 whitespace-nowrap">{report.name}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{report.dateCreated}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{report.createdBy}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="flex space-x-2">
-                                                <button onClick={() => handleViewReport(report)} className="text-blue-600 hover:text-blue-900"><Eye size={20} /></button>
-                                                <button onClick={() => handleEditReport(report)} className="text-green-600 hover:text-green-900"><Edit size={20} /></button>
-                                                <button onClick={() => handleDeleteReport(report.id)} className="text-red-600 hover:text-red-900"><Trash2 size={20} /></button>
-                                                <button onClick={() => {
-                                                    const jsonStr = JSON.stringify(report);
-                                                    const dataUri = `data:application/json;charset=utf-8,${encodeURIComponent(jsonStr)}`;
-                                                    const link = document.createElement('a');
-                                                    link.href = dataUri;
-                                                    link.download = `${report.name}.json`;
-                                                    link.click();
-                                                }} className="text-gray-600 hover:text-gray-900"><FileDown size={20} /></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-
-
-                {showReportDetails && selectedReport && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-                        <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                            <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-bold">{selectedReport.name}</h2>
-                                <button onClick={() => setShowReportDetails(false)} className="text-gray-500 hover:text-gray-700">
-                                    <X size={24} />
-                                </button>
-                            </div>
-                            <div className="space-y-4">
-                                <p><strong>Date Range:</strong> {selectedReport.dateRange}</p>
-                                <p><strong>Status:</strong> {selectedReport.status}</p>
-                                <p><strong>Position:</strong> {selectedReport.position}</p>
-                                <p><strong>Source:</strong> {selectedReport.source}</p>
-                                <div>
-                                    <h3 className="font-semibold mb-2">Report Data:</h3>
-                                    <table className="min-w-full divide-y divide-gray-200">
-                                        <thead className="bg-gray-50">
-                                            <tr>
-                                                {selectedReport.fields.map((field) => (
-                                                    <th key={field} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{field}</th>
-                                                ))}
-                                            </tr>
-                                        </thead>
-                                        <tbody className="bg-white divide-y divide-gray-200">
-                                            {selectedReport.data.map((row, index) => (
-                                                <tr key={index}>
-                                                    {selectedReport.fields.map((field) => (
-                                                        <td key={field} className="px-6 py-4 whitespace-nowrap">{row[field.toLowerCase().replace(' ', '')]}</td>
-                                                    ))}
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div className="flex items-center space-x-4">
+                            <input
+                                type="file"
+                                accept=".json"
+                                onChange={handleImportReport}
+                                className="hidden"
+                                id="file-upload"
+                            />
+                            <label
+                                htmlFor="file-upload"
+                                className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center space-x-2"
+                            >
+                                <Upload className="w-5 h-5" />
+                                <span>Import Report</span>
+                            </label>
+                            <button className="bg-[#F7CA44] text-white px-4 py-2 rounded hover:bg-yellow-600 flex items-center space-x-2">
+                                <FileDown className="w-5 h-5" />
+                                <span>Download CSV</span>
+                            </button>
                         </div>
                     </div>
-                )}
+                    {/* List of Reports */}
+                    <div className="space-y-4">
+                        {reports.map((report) => (
+                            <div key={report.id} className=" p-4 rounded shadow-md flex justify-between items-center bg-[#B7E0FF] text-slate-600 border-2 ">
+                                <div>
+                                    <h2 className="text-xl font-semibold">{report.name}</h2>
+                                    {/* <p className="text-slate-200">Created by {report.createdBy} on {report.dateCreated}</p> */}
+                                </div>
+                                <div className="flex space-x-4">
+                                    <button
+                                        onClick={() => handleViewReport(report)}
+                                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center space-x-2"
+                                    >
+                                        <Eye className="w-5 h-5" />
+                                        <span>View</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEditReport(report)}
+                                        className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 flex items-center space-x-2"
+                                    >
+                                        <Edit className="w-5 h-5" />
+                                        <span>Edit</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleDeleteReport(report.id)}
+                                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 flex items-center space-x-2"
+                                    >
+                                        <Trash2 className="w-5 h-5" />
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    {/* Create or Edit Report Form */}
+                    {(showCreateReport || showEditReport) && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                            <div className="bg-[#F3F7EC] p-6 rounded shadow-lg w-full max-w-lg mx-4 my-8 overflow-y-auto max-h-[90vh]">
+                                <h2 className="text-2xl font-semibold mb-4 text-red-600">
+                                    {showEditReport ? 'Edit Report' : 'Generate New Report'}
+                                </h2>
+                                <ReportForm onSubmit={showEditReport ? handleUpdateReport : handleCreateReport} />
+                            </div>
+                        </div>
+                    )}
+
+
+                    {/* Report Details Modal */}
+                    {showReportDetails && selectedReport && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                            <div className="bg-[#F3F7EC] border-2 border-slate-600 p-6 rounded shadow-lg w-full max-w-2xl space-y-4">
+                                <div className="flex justify-between items-center ">
+                                    <h2 className="text-2xl font-semibold text-red-600">Report Details: {selectedReport.name}</h2>
+                                    <button
+                                        onClick={() => setShowReportDetails(false)}
+                                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </button>
+                                </div>
+                                <p>
+                                    <strong>Date Range:</strong> {selectedReport.dateRange}
+                                </p>
+                                <p>
+                                    <strong>Status:</strong> {selectedReport.status}
+                                </p>
+                                <p>
+                                    <strong>Position:</strong> {selectedReport.position}
+                                </p>
+                                <p>
+                                    <strong>Source:</strong> {selectedReport.source}
+                                </p>
+                                <h3 className="text-xl font-semibold">Data</h3>
+                                <table className="min-w-full bg-white border rounded shadow">
+                                    <thead>
+                                        <tr>
+                                            {selectedReport.fields.map((field) => (
+                                                <th key={field} className="px-4 py-2 border">{field}</th>
+                                            ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {selectedReport.data.map((row, idx) => (
+                                            <tr key={idx} className="border-t">
+                                                {selectedReport.fields.map((field) => {
+                                                    // Map the field to the correct data key
+                                                    const fieldKey = field.toLowerCase().replace(/ /g, '');
+                                                    const fieldValue = row[fieldKey];
+
+                                                    // Determine if the field is "Applicant Name" or "Date Applied"
+                                                    if (field.toLowerCase().includes('applicant name')) {
+                                                        // Generate random name if missing
+                                                        return (
+                                                            <td key={field} className="px-4 py-2 border">
+                                                                {fieldValue || faker.name.fullName()}
+                                                            </td>
+                                                        );
+                                                    } else if (field.toLowerCase().includes('date applied')) {
+                                                        // Generate random date if missing
+                                                        return (
+                                                            <td key={field} className="px-4 py-2 border">
+                                                                {fieldValue || faker.date.past().toLocaleDateString()}
+                                                            </td>
+                                                        );
+                                                    } else {
+                                                        // Show other data fields or fallback to a generic value
+                                                        return (
+                                                            <td key={field} className="px-4 py-2 border">
+                                                                {fieldValue || "N/A"}
+                                                            </td>
+                                                        );
+                                                    }
+                                                })}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
+
         </div>
     );
 };
-
 
 export default CustomReportsModule;

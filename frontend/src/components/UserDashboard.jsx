@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import jobsData from "./jobsData.json"; // Assuming jobsData.json is in the same directory
 
-const Dashboard = () => {
+const UserDashboard = () => {
     const [selectedInterest, setSelectedInterest] = useState("");
     const [savedJobs, setSavedJobs] = useState([]);
     const [applications, setApplications] = useState([]);
@@ -279,4 +279,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default UserDashboard;

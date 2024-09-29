@@ -20,23 +20,25 @@ import AdminSideMenu from './components/SidebarMenu/AdminSidebarMenu'
 import AdminNavbar from './components/Navbar/AdminNavbar'
 import CustomReportsModule from './components/CustomReportsModule'
 import Metric from './components/Metric'
+import InterviewScheduling from './components/InterviewScheduling'
+import UserDashboard from './components/UserDashboard'
 
 
 const App = () => {
   return (
     <div>
-    {/* <AdminNavbar/> */}
+    {/* <UserDashboard/>
+    <InterviewScheduling/> */}
     <AdminSideMenu />
     {/* <UserSideMenu/> */}
     {/* <Hero />
     <Signup /> */}
     {/* <AccountCreationForm /> */}
-    {/* <Interview />
-    <Forms /> */}
-    {/* <JobCreationForm /> */}
-    {/* <JobListingsManagement /> */}
-    {/* <JobManagementSystem /> */}
-    {/* <JobCategoriesManagement />
+    {/* <Interview /> */}
+    {/* <Forms /> */}
+ 
+    {/* <JobManagementSystem />
+    <JobCategoriesManagement />
     <Dashboard />
     <ApplicationsManagement />
     <Chatbot />

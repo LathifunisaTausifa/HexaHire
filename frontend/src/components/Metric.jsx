@@ -93,7 +93,7 @@ const Metric = () => {
         <div className="overflow-x-auto  ">
           <table className="min-w-full bg-white">
             <thead>
-              <tr className=" text-black bg-gray-100 uppercase border-2 border-gray-600 text-sm leading-normal">
+              <tr className=" text-black bg-gray-100 uppercase border-2 border-gray-500 text-sm leading-normal">
                 <th className="py-3 px-6 text-left">Name</th>
                 <th className="py-3 px-6 text-left">Position</th>
                 <th className="py-3 px-6 text-left">Source</th>
