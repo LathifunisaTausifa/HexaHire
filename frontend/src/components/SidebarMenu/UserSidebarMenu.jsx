@@ -7,7 +7,7 @@ import { GrGroup , GrContact } from "react-icons/gr";
 import Chats from '../Chats';
 import AccountCreationForm from '../Login/AccountCreationForm';
 import UserDashboard from '../UserDashboard';
-import { MdOutlineKeyboardCommandKey } from "react-icons/md";
+import { MdOutlineKeyboardCommandKey , MdOutlineAssessment } from "react-icons/md";
 import TechnicalQuiz from '../Assessment';
 
 const UserSideMenu = () => {
@@ -35,7 +35,7 @@ const UserSideMenu = () => {
             className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'TechnicalQuiz' ? '' : ''}`}
             onClick={() => setActiveComponent('TechnicalQuiz')}
           >
-            <GrContact  size={24} />
+            <MdOutlineAssessment  size={24} />
           </li>
           <li
             className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'Chats' ? '' : ''}`}

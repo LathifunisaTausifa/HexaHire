@@ -31,10 +31,10 @@ const App = () => {
       {/* <UserDashboard/>
     <InterviewScheduling/> */}
       {/* <AdminSideMenu /> */}
-      {/* <UserSideMenu/>
-    <Chatbot /> */}
-      <Hero />
-      <Signup />
+      <UserSideMenu/>
+    <Chatbot />
+      {/* <Hero />
+      <Signup /> */}
       {/* <AccountCreationForm /> */}
       {/* <Interview /> */}
       {/* <Forms /> */}
