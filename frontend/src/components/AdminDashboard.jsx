@@ -28,7 +28,7 @@ const AdminDashboard = () => {
                 {/* Main Content */}
                 <div className="flex-1 p-10 overflow-auto ">
                     <div className="container mx-auto flex justify-center p-2">
-                        <h1 className="text-red-500 text-3xl uppercase font-bold">Manage</h1>
+                        <h1 className="text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90 text-3xl uppercase font-bold">Manage</h1>
                     </div>                
                     <p className="text-indigo-600 text-center ">
                         Manage candidates who have applied for the assessment.

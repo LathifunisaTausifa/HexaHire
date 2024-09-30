@@ -40,27 +40,33 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100  inset-0 top-0">
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-      <AdminNavbar />
-      <main className="container mx-auto p-4">
-        {activeScreen === 'dashboard' && (
-          <DashboardScreen 
-            applications={applications} 
-            onViewAllApplications={() => setActiveScreen('applications')}
-            onMoveToNextStage={handleMoveToNextStage}
-            onReject={handleReject}
-          />
-        )}
-        {activeScreen === 'applications' && (
-          <ApplicationsManagementScreen 
-            applications={applications}
-            onMoveToNextStage={handleMoveToNextStage}
-            onReject={handleReject}
-            onBack={() => setActiveScreen('dashboard')}
-          />
-        )}
-      </main>
+    <div>
+
+      <div className="min-h-screen bg-gray-100  inset-0 top-0">
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        <AdminNavbar />
+        <div className="container mx-auto flex justify-center p-2">
+          <h1 className="text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90 my-3 text-3xl uppercase font-bold"> Real-time Dashboard</h1>
+        </div>
+        <main className="container mx-auto p-4">
+          {activeScreen === 'dashboard' && (
+            <DashboardScreen
+              applications={applications}
+              onViewAllApplications={() => setActiveScreen('applications')}
+              onMoveToNextStage={handleMoveToNextStage}
+              onReject={handleReject}
+            />
+          )}
+          {activeScreen === 'applications' && (
+            <ApplicationsManagementScreen
+              applications={applications}
+              onMoveToNextStage={handleMoveToNextStage}
+              onReject={handleReject}
+              onBack={() => setActiveScreen('dashboard')}
+            />
+          )}
+        </main>
+      </div>
     </div>
   );
 };
@@ -74,12 +80,12 @@ const DashboardScreen = ({ applications, onViewAllApplications, onMoveToNextStag
       </div>
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-xl font-semibold mb-4">Recent Applications</h2>
-        <ApplicationsTable 
-          applications={applications.slice(0, 5)} 
+        <ApplicationsTable
+          applications={applications.slice(0, 5)}
           onMoveToNextStage={onMoveToNextStage}
           onReject={onReject}
         />
-        <button 
+        <button
           onClick={onViewAllApplications}
           className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition duration-300"
         >
@@ -128,8 +134,8 @@ const ApplicationsManagementScreen = ({ applications, onMoveToNextStage, onRejec
           </select>
           <input type="date" name="dateRange" onChange={handleFilterChange} className="p-2 border rounded" />
         </div>
-        <ApplicationsTable 
-          applications={filteredApplications} 
+        <ApplicationsTable
+          applications={filteredApplications}
           onMoveToNextStage={onMoveToNextStage}
           onReject={onReject}
         />
@@ -175,7 +181,7 @@ const ApplicationsTable = ({ applications, onMoveToNextStage, onReject }) => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">{application.dateApplied}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <button onClick={() => {}} className="text-indigo-600 hover:text-indigo-900 mr-2">
+                <button onClick={() => { }} className="text-indigo-600 hover:text-indigo-900 mr-2">
                   <FiEye className="inline" /> View
                 </button>
                 <button onClick={() => onMoveToNextStage(application.id)} className="text-green-600 hover:text-green-900 mr-2">

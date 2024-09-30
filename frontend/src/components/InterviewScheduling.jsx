@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams } from 'react-router-dom';
-
+import AdminNavbar from './Navbar/AdminNavbar';
 // Mock data
 const initialInterviews = [
   { id: 1, applicantName: 'John Doe', jobTitle: 'Software Engineer', date: '2024-10-01', time: '10:00 AM', status: 'Scheduled', interviewers: ['Alice', 'Bob'], mode: 'Video Call' },
@@ -18,10 +18,14 @@ const App = () => {
 
   return (
     <Router>
+      <AdminNavbar />
       <div className="p-4">
-        <nav className="mb-4">
-          <Link to="/" className="mr-4">Dashboard</Link>
-          <Link to="/schedule">Schedule New Interview</Link>
+        <div className="container mx-auto flex justify-center p-2">
+          <h1 className="text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90 text-3xl uppercase font-bold">Interview Scheduling</h1>
+        </div>
+        <nav className="my-6">
+          <Link to="/" className="mr-4 text-xl text-red-500 font-medium cursor-pointer border-r-2 border-b-2 border-red-500 hover:scale-105 duration-300 py-2 px-4 ">Dashboard</Link>
+          <Link to="/schedule" className="mr-4 text-xl text-red-500 font-medium cursor-pointer border-r-2 border-b-2 hover:scale-105 duration-300 border-red-500 py-2 px-4">Schedule New Interview</Link>
         </nav>
         <Routes>
           <Route path="/" element={<Dashboard interviews={interviews} setInterviews={setInterviews} />} />
@@ -52,7 +56,7 @@ const Dashboard = ({ interviews, setInterviews }) => {
 
   return (
     <div>
-      <div className="bg-white shadow-md rounded-lg mb-4 p-4">
+      <div className="bg-white shadow-md rounded-lg mb-4 p-4 border-2 border-red-600">
         <h2 className="text-xl font-bold">Upcoming Interviews</h2>
         <div className="text-2xl font-bold mt-2">{interviews.length}</div>
       </div>

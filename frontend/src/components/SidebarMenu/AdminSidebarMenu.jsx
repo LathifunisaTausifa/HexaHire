@@ -8,6 +8,10 @@ import { MdAssuredWorkload } from "react-icons/md";
 import CustomReportsModule from '../CustomReportsModule';
 import { TbReportSearch , TbReportAnalytics } from "react-icons/tb";
 import Metric from '../Metric';
+import { GrGroup , GrContact } from "react-icons/gr";
+import Chats from '../Chats';
+import InterviewScheduling from '../InterviewScheduling';
+import RecruitmentManagementSystem from '../ATS';
 
 const AdminSideMenu = () => {
   const [activeComponent, setActiveComponent] = useState('Dashboard'); // Default component to show
@@ -32,11 +36,17 @@ const AdminSideMenu = () => {
           >
             <IoCreateOutline size={24} />
           </li>
-          <li
+          {/* <li
             className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'AdminDashboard' ? '' : ''}`}
             onClick={() => setActiveComponent('AdminDashboard')}
           >
             <MdAssuredWorkload   size={24} />
+          </li> */}
+          <li
+            className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'RecruitmentManagementSystem' ? '' : ''}`}
+            onClick={() => setActiveComponent('RecruitmentManagementSystem')}
+          >
+            <MdAssuredWorkload  size={24} />
           </li>
           <li
             className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'CustomReportsModule' ? '' : ''}`}
@@ -50,6 +60,18 @@ const AdminSideMenu = () => {
           >
             <TbReportAnalytics size={24} />
           </li>
+          <li
+            className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'InterviewScheduling' ? '' : ''}`}
+            onClick={() => setActiveComponent('InterviewScheduling')}
+          >
+            <GrGroup  size={24} />
+          </li>
+          <li
+            className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'Chats' ? '' : ''}`}
+            onClick={() => setActiveComponent('Chats')}
+          >
+            <GrContact  size={24} />
+          </li>
         </ul>
       </div>
 
@@ -61,6 +83,9 @@ const AdminSideMenu = () => {
         {activeComponent === 'AdminDashboard' && <AdminDashboard />}
         {activeComponent === 'CustomReportsModule' && <CustomReportsModule />}
         {activeComponent === 'Metric' && <Metric />}
+        {activeComponent === 'Chats' && <Chats />}
+        {activeComponent === 'InterviewScheduling' && <InterviewScheduling />}
+        {activeComponent === 'RecruitmentManagementSystem' && <RecruitmentManagementSystem />}
       </div>
     </div>
   );

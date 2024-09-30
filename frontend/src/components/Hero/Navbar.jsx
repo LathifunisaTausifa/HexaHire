@@ -4,7 +4,7 @@ import logo from '../../assets/Hero/logo.png'
 
 const Navbar = () => {
   return (
-    <div data-aos='fade-down' className='fixed top-0 right-0 w-full z-50 py-4 sm:py-4 bg-black/10 backdrop-blur-sm px-3'>
+    <div data-aos='fade-down' className=' top-0 right-0 w-full z-50 py-4 sm:py-4 bg-black/10 backdrop-blur-sm px-3'>
     <div className='container'>
     <div className='flex justify-between items-center '>
         <div className='flex gap-4 text-white items-center text-2xl font-bold'>

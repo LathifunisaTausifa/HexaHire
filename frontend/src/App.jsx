@@ -22,33 +22,26 @@ import CustomReportsModule from './components/CustomReportsModule'
 import Metric from './components/Metric'
 import InterviewScheduling from './components/InterviewScheduling'
 import UserDashboard from './components/UserDashboard'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 const App = () => {
   return (
     <div>
-    {/* <UserDashboard/>
+      {/* <UserDashboard/>
     <InterviewScheduling/> */}
-    <AdminSideMenu />
-    {/* <UserSideMenu/> */}
-    {/* <Hero />
-    <Signup /> */}
-    {/* <AccountCreationForm /> */}
-    {/* <Interview /> */}
-    {/* <Forms /> */}
- 
-    {/* <JobManagementSystem />
-    <JobCategoriesManagement />
-    <Dashboard />
-    <ApplicationsManagement />
-    <Chatbot />
-    <Chats />
-    <Final_Confetti />
-    <Meeting />
-    <Main /> */}
+      {/* <AdminSideMenu /> */}
+      {/* <UserSideMenu/>
+    <Chatbot /> */}
+      <Hero />
+      <Signup />
+      {/* <AccountCreationForm /> */}
+      {/* <Interview /> */}
+      {/* <Forms /> */}
+
+      
     </div>
   )
 }
 
 export default App
-    

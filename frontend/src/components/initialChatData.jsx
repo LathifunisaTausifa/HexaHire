@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
 import { FaUserCircle, FaPaperPlane, FaRobot } from 'react-icons/fa';
+import { TbMessageChatbot } from "react-icons/tb";
 
 const initialChatData = [
   {
     user: 'Bot',
     message: 'Hello! How can I assist you with your recruitment needs today?'
-  },
-  {
-    user: 'User1',
-    message: 'I am looking for job opportunities.'
-  },
-  {
-    user: 'Bot',
-    message: 'We have several job openings. Can you specify the department?'
-  },
-  {
-    user: 'User2',
-    message: 'I am interested in the Engineering department.'
-  },
-  {
-    user: 'Bot',
-    message: 'We have openings in Engineering, Marketing, and Sales. Which one are you interested in?'
-  },
-  {
-    user: 'User3',
-    message: 'Tell me more about the Software Engineer positions.'
-  },
-  {
-    user: 'Bot',
-    message: 'Great! We have positions for Software Engineers and DevOps Engineers. Would you like to know more?'
   }
 ];
 
@@ -43,14 +20,21 @@ const ChatBubble = ({ user, message, isRight }) => {
 };
 
 const getBotResponse = (message) => {
-  if (message.toLowerCase().includes('job')) {
-    return 'We have several job openings. Can you specify the department?';
-  } else if (message.toLowerCase().includes('department')) {
+  const lowerCaseMessage = message.toLowerCase();
+  if (lowerCaseMessage.includes('job')) {
+    return 'We have several job openings in various departments like Engineering, Marketing, and Sales. Can you specify the department?';
+  } else if (lowerCaseMessage.includes('department')) {
     return 'We have openings in Engineering, Marketing, and Sales. Which one are you interested in?';
-  } else if (message.toLowerCase().includes('engineering')) {
-    return 'Great! We have positions for Software Engineers and DevOps Engineers. Would you like to know more?';
+  } else if (lowerCaseMessage.includes('engineering')) {
+    return 'In Engineering, we have positions for Software Engineers and DevOps Engineers. Would you like to know more about any specific role?';
+  } else if (lowerCaseMessage.includes('software')) {
+    return 'The Software Engineer position involves developing and maintaining high-performance applications. It requires experience in JavaScript, React, and Node.js.';
+  } else if (lowerCaseMessage.includes('devops')) {
+    return 'The DevOps Engineer role focuses on automating systems, CI/CD pipelines, and infrastructure management. Experience with AWS, Docker, and Kubernetes is required.';
+  } else if (lowerCaseMessage.includes('thank')) {
+    return 'You\'re welcome! Feel free to ask me anything else.';
   } else {
-    return "I'm not sure how to help with that. Can you please provide more details?";
+    return 'I\'m not sure how to help with that. Can you please provide more details or ask about job roles, departments, or openings?';
   }
 };
 
@@ -71,12 +55,12 @@ const Chatbot = ({ isVisible, toggleVisibility }) => {
   };
 
   return (
-    <div className={`fixed bottom-4 right-4 bg-gray-900 text-white rounded-lg shadow-lg ${isVisible ? 'block' : 'hidden'} w-80 h-96 flex flex-col`}>
+    <div className={`fixed bottom-4 right-4 bg-gray-900 text-white rounded-lg shadow-lg ${isVisible ? 'block' : 'hidden'} w-80 h-auto max-h-96 flex flex-col`}>
       <div className="bg-gray-800 text-white flex justify-between items-center p-4 rounded-t-lg">
         <h1 className="font-semibold text-lg">Smart Recruitment Chatbot</h1>
-        <FaUserCircle className="text-2xl" onClick={toggleVisibility} />
+        <FaUserCircle className="text-2xl cursor-pointer" onClick={toggleVisibility} />
       </div>
-      <div className="flex-1 overflow-y-scroll p-4 bg-gray-700">
+      <div className="flex-1 overflow-y-auto p-4 bg-gray-700">
         <div className="flex flex-col space-y-2">
           {chatData.map((chat, index) => (
             <ChatBubble
@@ -98,7 +82,7 @@ const Chatbot = ({ isVisible, toggleVisibility }) => {
             onChange={(e) => setInputValue(e.target.value)}
           />
           <button
-            className="bg-blue-500 rounded-lg py-2 px-4 ml-2 flex items-center justify-center"
+            className="bg-indigo-600 rounded-lg py-2 px-4 ml-2 flex items-center justify-center"
             onClick={handleSendMessage}
           >
             <FaPaperPlane />
@@ -117,12 +101,12 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col">
       <button
-        className="fixed bottom-4 right-4 bg-blue-500 text-white p-4 rounded-full shadow-lg"
+        className="fixed bottom-4 right-4 bg-[#FF1E1E]/80 text-white p-4 rounded-full shadow-lg"
         onClick={toggleChatVisibility}
       >
-        <FaRobot className="text-2xl" />
+        <TbMessageChatbot  className="text-2xl" />
       </button>
       <Chatbot isVisible={isChatVisible} toggleVisibility={toggleChatVisibility} />
     </div>

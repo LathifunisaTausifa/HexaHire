@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-
-// Admin and User dashboard components
-const AdminDashboard = () => <h2>Welcome to Admin Dashboard!</h2>;
-const UserDashboard = () => <h2>Welcome to User Dashboard!</h2>;
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import AdminSideMenu from '../SidebarMenu/AdminSidebarMenu';
+import UserSideMenu from '../SidebarMenu/UserSidebarMenu';
 
 const Signup = () => {
   const [formType, setFormType] = useState('login');
@@ -11,10 +10,12 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const [role, setRole] = useState('user'); // Role dropdown (user or admin)
+  const [role, setRole] = useState('user');
   const [otp, setOtp] = useState('');
   const [generatedOtp, setGeneratedOtp] = useState(null);
   const [isOtpSent, setIsOtpSent] = useState(false);
+
+  const navigate = useNavigate();
 
   // Save credentials to localStorage if "Remember Me" is checked
   const handleRememberMe = () => {
@@ -58,11 +59,13 @@ const Signup = () => {
 
     // Simulate login or registration handling
     if (formType === 'login') {
-      // Redirect based on role
       if (role === 'admin') {
-        window.location.href = '/admin'; // Redirect to Admin Dashboard
-      } else {
-        window.location.href = '/user'; // Redirect to User Dashboard
+        navigate('/admin'); // Redirect to Admin Dashboard
+      } else if (role === 'user') {
+        navigate('/user'); // Redirect to User Dashboard
+      }
+      else {
+        navigate ('/')
       }
     } else if (formType === 'signup') {
       console.log('Registration:', { fullName, email, password, role });
@@ -244,61 +247,67 @@ const Signup = () => {
 
   return (
     <div className="h-screen bg-gray-800 bg-opacity-10 flex justify-center items-center">
-      <div className="w-full max-w-md bg-gray-900 p-8 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold text-white mb-6 text-center">
-          {formType === 'login'
-            ? 'Sign In'
-            : formType === 'signup'
-            ? 'Sign Up'
-            : formType === 'forgotPassword'
-            ? 'Forgot Password'
-            : 'Reset Password'}
+      <div className="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-md">
+        <h2 className="text-center text-3xl font-extrabold text-white">
+          {formType === 'login' ? 'Login' : 'Sign Up'}
         </h2>
-        <form onSubmit={handleSubmit}>
-          {formType === 'login'
-            ? renderLoginForm()
-            : formType === 'signup'
-            ? renderSignupForm()
-            : formType === 'forgotPassword'
-            ? renderForgotPasswordForm()
-            : renderResetPasswordForm()}
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          {formType === 'login' && renderLoginForm()}
+          {formType === 'signup' && renderSignupForm()}
+          {formType === 'forgotPassword' && renderForgotPasswordForm()}
+          {formType === 'resetPassword' && renderResetPasswordForm()}
+
           {formType !== 'forgotPassword' && formType !== 'resetPassword' && (
-            <div className="mb-4">
+            <div>
               <button
                 type="submit"
                 className="w-full bg-indigo-600 text-white py-2 px-4 rounded-full"
               >
-                {formType === 'login' ? 'Sign In' : 'Sign Up'}
+                {formType === 'login' ? 'Login' : 'Sign Up'}
               </button>
+              <p className="mt-2 text-center text-sm text-gray-300">
+                {formType === 'login' ? (
+                  <>
+                    Don't have an account?{' '}
+                    <button
+                      type="button"
+                      onClick={() => setFormType('signup')}
+                      className="font-medium text-indigo-400 hover:text-indigo-500"
+                    >
+                      Sign Up
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    Already have an account?{' '}
+                    <button
+                      type="button"
+                      onClick={() => setFormType('login')}
+                      className="font-medium text-indigo-400 hover:text-indigo-500"
+                    >
+                      Login
+                    </button>
+                  </>
+                )}
+              </p>
             </div>
           )}
         </form>
-        <div className="text-center text-white">
-          {formType === 'login' ? (
-            <p>
-              Don't have an account?{' '}
-              <button
-                onClick={() => setFormType('signup')}
-                className="text-indigo-400"
-              >
-                Sign Up
-              </button>
-            </p>
-          ) : (
-            <p>
-              Already have an account?{' '}
-              <button
-                onClick={() => setFormType('login')}
-                className="text-indigo-400"
-              >
-                Sign In
-              </button>
-            </p>
-          )}
-        </div>
       </div>
     </div>
   );
 };
 
-export default Signup;
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Signup />} />
+        <Route path="/admin" element={<AdminSideMenu />} />
+        <Route path="/user" element={<UserSideMenu />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

@@ -269,7 +269,7 @@ const CustomReportsModule = () => {
             <div className="flex">
                 <div className="flex-1 p-6 space-y-6">
                     <div className="container mx-auto flex justify-center p-2">
-                        <h1 className="text-red-500 text-3xl uppercase font-bold">Custom Reports Module</h1>
+                        <h1 className="text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90 text-3xl uppercase font-bold">Custom Reports Module</h1>
                     </div>
                     <div className="flex justify-between items-center">
                         <button

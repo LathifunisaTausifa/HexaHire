@@ -5,6 +5,7 @@ import { IoMdCall } from "react-icons/io";
 import Swal from 'sweetalert2';
 import bgImg from '../../assets/Account/place.jpg'
 import bgImg2 from '../../assets/Account/place2.jpg'
+import UserNavbar from '../Navbar/UserNavbar';
 
 const AccountCreationForm = () => {
   const [atsScore, setAtsScore] = useState(null); // State to hold the ATS score
@@ -13,7 +14,7 @@ const AccountCreationForm = () => {
     const formSection = document.getElementById("form-section");
     formSection.scrollIntoView({ behavior: "smooth" });
   };
-  
+
   const generateRandomScore = () => {
     // Generate a random number between 71 and 100
     return Math.floor(Math.random() * (100 - 71 + 1)) + 71;
@@ -49,29 +50,29 @@ const AccountCreationForm = () => {
   };
 
   return (
-    <div>
-      <div className='text-white bg-[#007272] py-4 px-2 font-2xl font-bold'>HexaHire</div>
+    <div className='bg-[#e6faf8]'>            <UserNavbar />
+
       <div className="relative w-full h-[500px] mb-48"> {/* Container for image */}
-        <img 
-          src={bgImg2} 
+        <img
+          src={bgImg2}
           alt="Descriptive Alt Text" // Provide alt text for accessibility
           className="object-cover w-full h-full opacity-80" // Full width, height, and opacity
           style={{ backdropFilter: 'blur(5px)' }} // Backdrop blur effect
         />
         <div className="absolute inset-0 bg-black bg-opacity-30"></div> {/* Overlay for opacity */}
-       {/* Button to trigger form */}
-       <div className="absolute inset-x-0  my-5  flex items-center flex-col justify-center">
-       <p className='px-5 text-[#007272]/70 text-xl font-semibold '><span className=' text-5xl text-[#007272] font-vibes italic'>HexaHire</span>: Revolutionizing the way talent meets opportunity with a seamless, next-gen hiring experience that empowers both employers and candidates to unlock their full potential.</p>
-          <button 
-            className='bg-[#007272] text-white py-4 px-16 rounded-full'             onClick={scrollToForm}
+        {/* Button to trigger form */}
+        <div className="absolute inset-x-0  my-5  flex items-center flex-col justify-center">
+          <p className='px-5  text-[#003C43] text-xl font-semibold '><span className=' text-5xl text-[#003C43] font-vibes italic'>HexaHire</span>: Revolutionizing the way talent meets opportunity with a seamless, next-gen hiring experience that empowers both employers and candidates to unlock their full potential.</p>
+          <button
+            className='bg-[#007272] text-white py-4 px-16 rounded-full' onClick={scrollToForm}
           >
             Get Started
           </button>
         </div>
       </div>
       <div id="form-section" className="bg-[#e6faf8]  min-h-screen flex items-center justify-center">
-        <div className="bg-white my-10 rounded-lg shadow-lg p-8 w-full max-w-6xl">
-          <div className="flex justify-between items-center mb-6">
+        <div className="bg-white my-10 rounded-lg shadow-lg p-8 border-2 border-[#007272] w-full max-w-6xl">
+          <div className="flex justify-between items-center mb-6 ">
             <h1 className="text-2xl font-bold text-[#007272]">HexaHire
             </h1>
             <h2 className="text-xl font-semibold text-[#007272]/70">Create account</h2>
@@ -202,7 +203,7 @@ const AccountCreationForm = () => {
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 };

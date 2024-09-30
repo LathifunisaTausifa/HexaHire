@@ -46,7 +46,7 @@ const JobCreationForm = ({ onJobCreate }) => {
     <div className="">
       <AdminNavbar />
       <div className="container mx-auto flex justify-center p-2">
-        <h1 className="text-red-500 text-3xl uppercase font-bold">Create New Job Postings</h1>
+        <h1 className="text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90 text-3xl uppercase font-bold">Create New Job Postings</h1>
       </div>
       <div className="max-w-4xl mt-10 mx-auto p-6 border-2 border-indigo-600 bg-white shadow-lg rounded-lg mb-8">
         <h2 className="text-2xl font-bold mb-6 text-indigo-600">Job Details</h2>
