@@ -10,7 +10,7 @@ import { TbReportSearch , TbReportAnalytics } from "react-icons/tb";
 import Metric from '../Metric';
 import { GrGroup , GrContact } from "react-icons/gr";
 import Chats from '../Chats';
-import InterviewScheduling from '../InterviewScheduling';
+import InterviewScheduling from '../../components/InterviewScheduling';
 import RecruitmentManagementSystem from '../ATS';
 
 const AdminSideMenu = () => {

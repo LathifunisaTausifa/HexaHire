@@ -28,13 +28,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const App = () => {
   return (
     <div>
-      {/* <UserDashboard/>
-    <InterviewScheduling/> */}
+      {/* <UserDashboard/> */}
+    {/* <InterviewScheduling/> */}
       {/* <AdminSideMenu /> */}
-      <UserSideMenu/>
+      {/* <UserSideMenu/> */}
     <Chatbot />
-      {/* <Hero />
-      <Signup /> */}
+    <Hero />
+      {/* <Signup /> */}
       {/* <AccountCreationForm /> */}
       {/* <Interview /> */}
       {/* <Forms /> */}

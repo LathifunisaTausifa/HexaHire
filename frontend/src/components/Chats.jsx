@@ -48,12 +48,12 @@ export default function Chats() {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="bg-gray-800 text-white flex justify-between items-center p-4">
+      <div className="bg-[#266F89] text-white flex justify-between items-center p-4">
         <h1 className="font-semibold text-lg">Smart Recruitment Chatbot</h1>
         <FaUserCircle className="text-2xl" />
       </div>
-      <div className="flex-1 overflow-y-scroll p-4">
-        <div className="flex flex-col space-y-2">
+      <div className="flex-1 overflow-y-scroll p-4 bg-[#E4F5E5]">
+        <div className="flex flex-col space-y-2 ">
           {chatData.map((chat, index) => (
             <ChatBubble
               key={index}
@@ -64,12 +64,12 @@ export default function Chats() {
           ))}
         </div>
       </div>
-      <div className="bg-gray-800 text-white p-4">
+      <div className="bg-[#266F89] text-white p-4">
         <div className="flex items-center">
           <input
             type="text"
             placeholder="Type your message here"
-            className="flex-1 bg-gray-700 rounded-lg py-2 px-4 text-white"
+            className="flex-1 bg-[#3D93A3] rounded-lg py-2 px-4 text-white"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />

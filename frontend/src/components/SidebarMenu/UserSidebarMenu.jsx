@@ -9,6 +9,8 @@ import AccountCreationForm from '../Login/AccountCreationForm';
 import UserDashboard from '../UserDashboard';
 import { MdOutlineKeyboardCommandKey , MdOutlineAssessment } from "react-icons/md";
 import TechnicalQuiz from '../Assessment';
+import JobApplicationProgress from '../JobApplicationProgress';
+import { GiProgression } from "react-icons/gi";
 
 const UserSideMenu = () => {
   const [activeComponent, setActiveComponent] = useState('AccountCreationForm'); // Default component to show
@@ -38,6 +40,12 @@ const UserSideMenu = () => {
             <MdOutlineAssessment  size={24} />
           </li>
           <li
+            className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'JobApplicationProgress' ? '' : ''}`}
+            onClick={() => setActiveComponent('JobApplicationProgress')}
+          >
+            <GiProgression  size={24} />
+          </li>
+          <li
             className={`cursor-pointer p-2 rounded-lg ${activeComponent === 'Chats' ? '' : ''}`}
             onClick={() => setActiveComponent('Chats')}
           >
@@ -52,6 +60,7 @@ const UserSideMenu = () => {
         {activeComponent === 'UserDashboard' && <UserDashboard />}
         {activeComponent === 'Chats' && <Chats />}
         {activeComponent === 'TechnicalQuiz' && <TechnicalQuiz />}
+        {activeComponent === 'JobApplicationProgress' && <JobApplicationProgress />}
       </div>
     </div>
   );

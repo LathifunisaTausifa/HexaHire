@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+import UserNavbar from './Navbar/UserNavbar';
 
 const questions = [
   {
@@ -116,7 +116,7 @@ const TechnicalQuiz = () => {
 
   const renderQuestion = (question) => (
     <div key={question.id} className="mb-6 bg-white rounded-lg shadow-lg overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-4">
+      <div className="bg-gradient-to-r from-[#16423C] to-[#6A9C89] text-white p-4">
         <h2 className="text-xl font-bold">Question {question.id}</h2>
       </div>
       <div className="p-6">
@@ -178,9 +178,11 @@ const TechnicalQuiz = () => {
 
 
   return (
+    <div>
+    <UserNavbar />
     <div className="container mx-auto p-4 max-w-4xl">
       <div className="flex justify-between items-start mb-8">
-        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Technical Web Development Quiz</h1>
+        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#16423C] to-[#6A9C89]">Technical Web Development Quiz</h1>
         <div className="w-40 h-30 bg-gray-200 rounded-lg overflow-hidden shadow-md">
           {cameraStream ? (
             <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
@@ -200,7 +202,7 @@ const TechnicalQuiz = () => {
           {questions.map(renderQuestion)}
           <button
             onClick={handleSubmit}
-            className="mt-8 w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg text-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition duration-300"
+            className="mt-8 w-full bg-gradient-to-r from-[#16423C] to-[#6A9C89] text-white py-3 rounded-lg text-lg font-semibold hover:from-[#16423C]/90 hover:to-[#6A9C89]/70 transition duration-300"
           >
             Submit Quiz
           </button>
@@ -208,54 +210,10 @@ const TechnicalQuiz = () => {
       ) : (
         <>
           {renderResults()}
-          <div className="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4">
-              <h2 className="text-2xl font-bold">Schedule a Follow-up Meeting</h2>
-            </div>
-            <div className="p-6 space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Start Date</label>
-                <input
-                  type="date"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">End Date</label>
-                <input
-                  type="date"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Time</label>
-                <input
-                  type="time"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                />
-              </div>
-              <button
-                onClick={handleSchedule}
-                className="w-full bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition duration-300"
-              >
-                Schedule Meeting
-              </button>
-              <button
-                onClick={handleSchedule}
-                className="w-full bg-pink-500 text-white py-2 px-4 rounded-md hover:bg-pink-600 transition duration-300"
-              >
-                Send Email Notification
-              </button>
-            </div>
-          </div>
+         
         </>
       )}
+    </div>
     </div>
   );
 };

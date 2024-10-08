@@ -12,7 +12,7 @@ const Navbar = () => {
         </div>
         <div className='text-white hidden md:block '>
             <ul className='flex py-4 gap-8 sm:py-0 text-xl font-semibold '>
-                <li>
+                {/* <li>
                     <a href='#'>Home</a>
                 </li>
                 <li>
@@ -23,7 +23,7 @@ const Navbar = () => {
                 </li>
                 <li>
                     <a href='#'>Satellite</a>
-                </li>
+                </li> */}
             </ul>
         </div>
         <div className='pr-3'>
