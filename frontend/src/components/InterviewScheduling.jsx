@@ -1,58 +1,73 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams } from 'react-router-dom';
 import AdminNavbar from './Navbar/AdminNavbar';
+
+
 // Mock data
 const initialInterviews = [
   { id: 1, applicantName: 'John Doe', jobTitle: 'Software Engineer', date: '2024-10-01', time: '10:00 AM', status: 'Scheduled', interviewers: ['Alice', 'Bob'], mode: 'Video Call' },
   { id: 2, applicantName: 'Jane Smith', jobTitle: 'Product Manager', date: '2024-10-02', time: '02:00 PM', status: 'Scheduled', interviewers: ['Charlie', 'David'], mode: 'In-Person', location: 'Office A' },
 ];
 
-const applicants = ['John Doe', 'Jane Smith', 'Bob Johnson'];
-const jobTitles = ['Software Engineer', 'Product Manager', 'Designer'];
-const interviewers = ['Alice', 'Bob', 'Charlie', 'David'];
+
 const interviewModes = ['In-Person', 'Video Call', 'Phone Call', 'Teams call'];
+
 
 // Main App Component
 const App = () => {
   const [interviews, setInterviews] = useState(initialInterviews);
+  const [currentView, setCurrentView] = useState('dashboard'); // State to manage the current view
+
+
+  const renderView = () => {
+    switch (currentView) {
+      case 'dashboard':
+        return <Dashboard interviews={interviews} setInterviews={setInterviews} setCurrentView={setCurrentView} />;
+      case 'schedule':
+        return <InterviewScheduling interviews={interviews} setInterviews={setInterviews} setCurrentView={setCurrentView} />;
+      case 'details':
+        return <InterviewDetails interviews={interviews} setCurrentView={setCurrentView} />;
+      case 'reschedule':
+        return <RescheduleInterview interviews={interviews} setInterviews={setInterviews} setCurrentView={setCurrentView} />;
+      default:
+        return <Dashboard interviews={interviews} setInterviews={setInterviews} setCurrentView={setCurrentView} />;
+    }
+  };
+
 
   return (
-    <Router>
+    <div>
       <AdminNavbar />
       <div className="p-4">
         <div className="container mx-auto flex justify-center p-2">
           <h1 className="text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90 text-3xl uppercase font-bold">Interview Scheduling</h1>
         </div>
         <nav className="my-6">
-          <Link to="/" className="mr-4 text-xl text-red-500 font-medium cursor-pointer border-r-2 border-b-2 border-red-500 hover:scale-105 duration-300 py-2 px-4 ">Dashboard</Link>
-          <Link to="/schedule" className="mr-4 text-xl text-red-500 font-medium cursor-pointer border-r-2 border-b-2 hover:scale-105 duration-300 border-red-500 py-2 px-4">Schedule New Interview</Link>
+          <button onClick={() => setCurrentView('dashboard')} className="mr-4 text-xl text-red-500 font-medium cursor-pointer border-r-2 border-b-2 border-red-500 hover:scale-105 duration-300 py-2 px-4">Dashboard</button>
+          <button onClick={() => setCurrentView('schedule')} className="mr-4 text-xl text-red-500 font-medium cursor-pointer border-r-2 border-b-2 hover:scale-105 duration-300 border-red-500 py-2 px-4">Schedule New Interview</button>
         </nav>
-        <Routes>
-          <Route path="/" element={<Dashboard interviews={interviews} setInterviews={setInterviews} />} />
-          <Route path="/schedule" element={<InterviewScheduling interviews={interviews} setInterviews={setInterviews} />} />
-          <Route path="/details/:id" element={<InterviewDetails interviews={interviews} setInterviews={setInterviews} />} />
-          <Route path="/reschedule/:id" element={<RescheduleInterview interviews={interviews} setInterviews={setInterviews} />} />
-        </Routes>
+        {renderView()} {/* Render the current view */}
       </div>
-    </Router>
+    </div>
   );
 };
 
-// Dashboard Component
-const Dashboard = ({ interviews, setInterviews }) => {
-  const navigate = useNavigate(); // Use useNavigate here
 
+// Dashboard Component
+const Dashboard = ({ interviews, setInterviews, setCurrentView }) => {
   const handleView = (id) => {
-    navigate(`/details/${id}`);
+    setCurrentView('details');
   };
+
 
   const handleReschedule = (id) => {
-    navigate(`/reschedule/${id}`);
+    setCurrentView('reschedule');
   };
+
 
   const handleCancel = (id) => {
     setInterviews(interviews.filter(interview => interview.id !== id));
   };
+
 
   return (
     <div>
@@ -61,12 +76,14 @@ const Dashboard = ({ interviews, setInterviews }) => {
         <div className="text-2xl font-bold mt-2">{interviews.length}</div>
       </div>
 
+
       <button
-        onClick={() => navigate('/schedule')}
+        onClick={() => setCurrentView('schedule')}
         className="bg-blue-500 text-white px-4 py-2 mb-4 rounded"
       >
         Schedule New Interview
       </button>
+
 
       <table className="min-w-full bg-white">
         <thead>
@@ -115,9 +132,9 @@ const Dashboard = ({ interviews, setInterviews }) => {
   );
 };
 
+
 // Interview Scheduling Component
-const InterviewScheduling = ({ interviews, setInterviews }) => {
-  const navigate = useNavigate(); // Use useNavigate here
+const InterviewScheduling = ({ interviews, setInterviews, setCurrentView }) => {
   const [formData, setFormData] = useState({
     applicantName: '',
     jobTitle: '',
@@ -128,10 +145,12 @@ const InterviewScheduling = ({ interviews, setInterviews }) => {
     location: '',
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -141,8 +160,9 @@ const InterviewScheduling = ({ interviews, setInterviews }) => {
       status: 'Scheduled',
     };
     setInterviews([...interviews, newInterview]);
-    navigate('/'); // Use navigate instead of history.push
+    setCurrentView('dashboard'); // Navigate back to dashboard
   };
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -195,6 +215,7 @@ const InterviewScheduling = ({ interviews, setInterviews }) => {
         ))}
       </select>
 
+
       {formData.mode === 'In-Person' && (
         <input
           type="text"
@@ -207,6 +228,7 @@ const InterviewScheduling = ({ interviews, setInterviews }) => {
         />
       )}
 
+
       <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
         Schedule Interview
       </button>
@@ -214,84 +236,68 @@ const InterviewScheduling = ({ interviews, setInterviews }) => {
   );
 };
 
+
 // Interview Details Component
-const InterviewDetails = ({ interviews }) => {
-  const { id } = useParams();
-  const interview = interviews.find((i) => i.id === parseInt(id));
+const InterviewDetails = ({ interviews, setCurrentView }) => {
+  const [interview, setInterview] = useState(interviews[0]); // Default to the first interview
 
-  const handleReschedule = () => {
-    // Navigate to reschedule interview
-  };
-
-  const handleCancel = () => {
-    // Handle canceling the interview
-  };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4">
+    <div>
       <h2 className="text-xl font-bold">Interview Details</h2>
-      <p>Applicant: {interview.applicantName}</p>
-      <p>Job Title: {interview.jobTitle}</p>
-      <p>Date: {interview.date}</p>
-      <p>Time: {interview.time}</p>
-      <p>Mode: {interview.mode}</p>
-      {interview.mode === 'In-Person' && <p>Location: {interview.location}</p>}
-      <p>Interviewers: {interview.interviewers.join(', ')}</p>
-      <p>Status: {interview.status}</p>
-      <button
-        onClick={handleReschedule}
-        className="bg-yellow-500 text-white px-4 py-2 rounded"
-      >
-        Reschedule
-      </button>
-      <button
-        onClick={handleCancel}
-        className="bg-red-500 text-white px-4 py-2 rounded"
-      >
-        Cancel
-      </button>
+      <p><strong>Applicant Name:</strong> {interview.applicantName}</p>
+      <p><strong>Job Title:</strong> {interview.jobTitle}</p>
+      <p><strong>Date:</strong> {interview.date}</p>
+      <p><strong>Time:</strong> {interview.time}</p>
+      <p><strong>Status:</strong> {interview.status}</p>
+      <p><strong>Interviewers:</strong> {interview.interviewers.join(', ')}</p>
+      <p><strong>Mode:</strong> {interview.mode}</p>
+      {interview.mode === 'In-Person' && <p><strong>Location:</strong> {interview.location}</p>}
+
+
+      <button onClick={() => setCurrentView('dashboard')} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Back to Dashboard</button>
     </div>
   );
 };
 
-// Reschedule Interview Component
-const RescheduleInterview = ({ interviews, setInterviews }) => {
-  const { id } = useParams();
-  const navigate = useNavigate(); // Use useNavigate here
-  const interview = interviews.find((i) => i.id === parseInt(id));
-  const [date, setDate] = useState(interview?.date || '');
-  const [time, setTime] = useState(interview?.time || '');
 
-  const handleReschedule = (e) => {
-    e.preventDefault();
-    const updatedInterviews = interviews.map((i) =>
-      i.id === parseInt(id) ? { ...i, date, time } : i
-    );
-    setInterviews(updatedInterviews);
-    navigate('/'); // Use navigate instead of history.push
+// Reschedule Interview Component
+const RescheduleInterview = ({ interviews, setInterviews, setCurrentView }) => {
+  const [selectedInterview, setSelectedInterview] = useState(interviews[0]); // Default to the first interview
+  const [newDate, setNewDate] = useState(selectedInterview.date);
+  const [newTime, setNewTime] = useState(selectedInterview.time);
+
+
+  const handleReschedule = () => {
+    setInterviews(interviews.map(interview =>
+      interview.id === selectedInterview.id ? { ...interview, date: newDate, time: newTime } : interview
+    ));
+    setCurrentView('dashboard');
   };
 
+
   return (
-    <form onSubmit={handleReschedule} className="space-y-4">
+    <div>
+      <h2 className="text-xl font-bold">Reschedule Interview for {selectedInterview.applicantName}</h2>
       <input
         type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
+        value={newDate}
+        onChange={(e) => setNewDate(e.target.value)}
         className="border rounded w-full p-2"
         required
       />
       <input
         type="time"
-        value={time}
-        onChange={(e) => setTime(e.target.value)}
+        value={newTime}
+        onChange={(e) => setNewTime(e.target.value)}
         className="border rounded w-full p-2"
         required
       />
-      <button type="submit" className="bg-yellow-500 text-white px-4 py-2 rounded">
-        Reschedule
-      </button>
-    </form>
+      <button onClick={handleReschedule} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Save Changes</button>
+      <button onClick={() => setCurrentView('dashboard')} className="mt-4 ml-2 bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+    </div>
   );
 };
+
 
 export default App;

@@ -274,10 +274,8 @@ const Hero = () => {
                 <h1 data-aos="fade-up" className="font-bold text-7xl uppercase">
                   Smart Recruitment System
                 </h1>
-                <p data-aos="fade-up" data-aos-delay="300">
-                  In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
-                  to demonstrate the visual form of a document or a typeface without relying on
-                  meaningful content.
+                <p data-aos="fade-up" data-aos-delay="300" className=' text-2xl font-semibold'>
+                  Making Professionals Connect and Secure their Dream Job
                 </p>
                 <button
                   data-aos="fade-up"

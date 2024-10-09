@@ -148,7 +148,7 @@ Skills:
 
                 {/* Dashboard Section */}
                 <section className="mb-10">
-                    <h2 className="text-3xl font-bold mb-6">Dashboard</h2>
+                    <h2 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90  ">Dashboard</h2>
                     <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="bg-white p-4 rounded shadow">
                             <h3 className="text-xl font-semibold">Job Openings</h3>
@@ -160,11 +160,9 @@ Skills:
                         </div>
                     </div>
                 </section>
-
-
                 {/* Applications Management Section */}
                 <section className="mb-10">
-                    <h2 className="text-3xl font-bold mb-6">Applications Management</h2>
+                    <h2 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90 ">Applications Management</h2>
                     <div className="mb-6 flex space-x-4">
                         <select
                             name="jobTitle"
@@ -302,7 +300,7 @@ Skills:
 
                 {/* Notifications Section */}
                 <section>
-                    <h2 className="text-3xl font-bold mb-6">Notifications</h2>
+                    <h2 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-t from-blue-500/90 to-purple-500/90 ">Notifications</h2>
                     <div className="bg-white p-6 rounded shadow">
                         <h3 className="text-2xl font-semibold mb-4">Notifications List</h3>
                         <table className="w-full">
