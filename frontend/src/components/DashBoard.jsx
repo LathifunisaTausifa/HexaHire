@@ -181,9 +181,9 @@ const ApplicationsTable = ({ applications, onMoveToNextStage, onReject }) => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">{application.dateApplied}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <button onClick={() => { }} className="text-indigo-600 hover:text-indigo-900 mr-2">
+                {/* <button onClick={() => { }} className="text-indigo-600 hover:text-indigo-900 mr-2">
                   <FiEye className="inline" /> View
-                </button>
+                </button> */}
                 <button onClick={() => onMoveToNextStage(application.id)} className="text-green-600 hover:text-green-900 mr-2">
                   <FiChevronRight className="inline" /> Move
                 </button>

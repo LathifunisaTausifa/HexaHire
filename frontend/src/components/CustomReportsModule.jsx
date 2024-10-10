@@ -294,16 +294,16 @@ const CustomReportsModule = () => {
                                 <Upload className="w-5 h-5" />
                                 <span>Import Report</span>
                             </label>
-                            <button className="bg-[#F7CA44] text-white px-4 py-2 rounded hover:bg-yellow-600 flex items-center space-x-2">
+                            {/* <button className="bg-[#F7CA44] text-white px-4 py-2 rounded hover:bg-yellow-600 flex items-center space-x-2">
                                 <FileDown className="w-5 h-5" />
                                 <span>Download CSV</span>
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                     {/* List of Reports */}
                     <div className="space-y-4">
                         {reports.map((report) => (
-                            <div key={report.id} className=" p-4 rounded shadow-md flex justify-between items-center bg-[#B7E0FF] text-slate-600 border-2 ">
+                            <div key={report.id} className=" p-4 rounded shadow-md flex justify-between items-center bg-gray-200 text-slate-600 border-2 ">
                                 <div>
                                     <h2 className="text-xl font-semibold">{report.name}</h2>
                                     {/* <p className="text-slate-200">Created by {report.createdBy} on {report.dateCreated}</p> */}
