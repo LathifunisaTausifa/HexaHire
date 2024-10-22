@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import AdminSideMenu from '../SidebarMenu/AdminSidebarMenu';
 import UserSideMenu from '../SidebarMenu/UserSidebarMenu';
 import { FaChevronCircleDown, FaChevronDown } from 'react-icons/fa';
+import axios from 'axios';
 
 const Hero = () => {
   const signupRef = useRef(null);
@@ -63,16 +64,36 @@ const Hero = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleRememberMe();
 
-    if (formType === 'login') {
-      if (role === 'admin') {
-        navigate('/admin');
-      } else {
-        navigate('/user');
+    // Prepare data to be sent to backend
+    const payload = {
+      email,
+      password,
+      fullName,
+      role
+    };
+
+    try {
+      if (formType === 'signup') {
+        // API call for signup
+        const response = await axios.post('http://localhost:5000/api/register', payload);
+        alert(response.data.message);
+      } else if (formType === 'login') {
+        // API call for login
+        const response = await axios.post('http://localhost:5000/api/login', { email, password });
+        alert(response.data.message);
+
+        if (response.data.user.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/user');
+        }
       }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
     }
   };
 
